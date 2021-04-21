@@ -10,12 +10,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="FastView"
+        android:text="TODO: combinacion de las vistas de todas las secciones"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:background="@color/appBase"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -25,12 +26,24 @@
 
         <ImageButton
             android:id="@+id/menu"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/set" />
+            android:background="@color/appBase"
+            app:srcCompat="@drawable/set2" />
+
+        <ImageButton
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@color/appBase"
+            app:srcCompat="@drawable/asksmall" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
