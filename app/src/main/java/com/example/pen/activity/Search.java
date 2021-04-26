@@ -51,7 +51,7 @@ public class Search extends AppCompatActivity {
                 AppDb db= Room.databaseBuilder(Search.this, AppDb.class,"url").allowMainThreadQueries().build();
                 if(!url.equals("file:///android_asset/cannotload.html")){
                     Url urlSaved=db.urlDAO().findByUrl(url);
-                    SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat format= Url.SIMPLE_DATE_FORMAT;
                     if(urlSaved==null){
                         Url urlModel =new Url(format.format(new Date()),url);
                         db.urlDAO().insert(urlModel);
@@ -62,13 +62,6 @@ public class Search extends AppCompatActivity {
                 }
             }
         });
-
-        if(bundle.getString("url")==null){
-            handler.loadUrl("https://www.google.com/");
-        }else{
-            handler.loadUrl(bundle.getString("url"));
-        }
-
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,5 +92,11 @@ public class Search extends AppCompatActivity {
                 }
             }
         });
+
+        if(bundle !=null && bundle.getString("url")!=null){
+            handler.loadUrl(bundle.getString("url"));
+        }else{
+            handler.loadUrl("https://www.google.com/");
+        }
     }
 }

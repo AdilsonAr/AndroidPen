@@ -67,7 +67,7 @@
             android:adjustViewBounds="true"
             android:background="@color/appBase"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/back3" />
+            app:srcCompat="@drawable/vertical" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

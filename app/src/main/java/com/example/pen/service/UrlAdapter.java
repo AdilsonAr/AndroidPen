@@ -19,9 +19,23 @@ public class UrlAdapter extends RecyclerView.Adapter<UrlAdapter.ViewHolder> {
     private List<Url> lista;
     public UrlAdapterListener onClickListener;
 
-    public UrlAdapter(List<Url> lista, UrlAdapterListener onClickListener) {
+    public List<Url> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Url> lista) {
         this.lista = lista;
+    }
+
+    public UrlAdapterListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(UrlAdapterListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public UrlAdapter() {
     }
 
     @NonNull
