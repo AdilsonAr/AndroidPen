@@ -1,8 +1,10 @@
 package com.example.pen.service;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +16,12 @@ import com.example.pen.model.Url;
 import java.util.List;
 
 public class UrlAdapter extends RecyclerView.Adapter<UrlAdapter.ViewHolder> {
-    public List<Url> lista;
+    private List<Url> lista;
+    public UrlAdapterListener onClickListener;
 
-    public UrlAdapter(List<Url> lista) {
+    public UrlAdapter(List<Url> lista, UrlAdapterListener onClickListener) {
         this.lista = lista;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -33,6 +37,19 @@ public class UrlAdapter extends RecyclerView.Adapter<UrlAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull UrlAdapter.ViewHolder holder, int position) {
         holder.url.setText(lista.get(position).getUrl());
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.deleteOnClick(v, position);
+            }
+        });
+
+        holder.searchAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.searchAgainOnClick(v,position);
+            }
+        });
     }
 
     @Override
@@ -42,10 +59,19 @@ public class UrlAdapter extends RecyclerView.Adapter<UrlAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView url;
+        private final ImageButton delete;
+        private final ImageButton searchAgain;
 
         public ViewHolder(View itemView) {
             super(itemView);
             url = itemView.findViewById(R.id.url);
+            delete = itemView.findViewById(R.id.delete);
+            searchAgain=itemView.findViewById(R.id.searchAgain);
         }
+    }
+
+    public interface UrlAdapterListener{
+        void deleteOnClick(View v, int position);
+        void searchAgainOnClick(View v, int position);
     }
 }

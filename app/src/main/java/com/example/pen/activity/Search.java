@@ -37,6 +37,7 @@ public class Search extends AppCompatActivity {
         WebView wv=findViewById(R.id.wv);
 
         WebViewHandler handler=new WebViewHandler(wv);
+        Bundle bundle=getIntent().getExtras();
         handler.getWebView().setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
@@ -61,7 +62,13 @@ public class Search extends AppCompatActivity {
                 }
             }
         });
-        handler.loadUrl("https://www.google.com/");
+
+        if(bundle.getString("url")==null){
+            handler.loadUrl("https://www.google.com/");
+        }else{
+            handler.loadUrl(bundle.getString("url"));
+        }
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

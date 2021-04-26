@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.pen.R;
 import com.example.pen.dao.AppDb;
+import com.example.pen.dao.UrlDAO;
 import com.example.pen.model.Url;
 import com.example.pen.service.UrlAdapter;
 
@@ -45,7 +48,24 @@ public class SearchList extends AppCompatActivity {
             return 0;
         });
 
-        UrlAdapter urlAdapter=new UrlAdapter(list);
+        UrlAdapter urlAdapter=new UrlAdapter(list, new UrlAdapter.UrlAdapterListener() {
+            @Override
+            public void deleteOnClick(View v, int position) {
+                Url deleting=list.get(position);
+                //AppDb db= Room.databaseBuilder(SearchList.this, AppDb.class,"url").allowMainThreadQueries().build();
+                //db.urlDAO().delete(deleting);
+                Toast.makeText(getApplicationContext(),"eliminado : "+deleting.getUrl(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void searchAgainOnClick(View v, int position) {
+                Url searching=list.get(position);
+                Intent act=new Intent(SearchList.this,Search.class);
+                act.putExtra("url",searching.getUrl());
+                startActivity(act);
+            }
+        });
+
         recyclerView.setAdapter(urlAdapter);
 
         menu.setOnClickListener(new View.OnClickListener() {
