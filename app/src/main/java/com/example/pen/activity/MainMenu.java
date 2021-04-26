@@ -15,10 +15,37 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         ImageButton back=findViewById(R.id.back);
+        ImageButton apuntes=findViewById(R.id.apuntes);
+        ImageButton search=findViewById(R.id.busca);
+        ImageButton busquedas=findViewById(R.id.busquedas);
+
+        apuntes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act=new Intent(MainMenu.this,Apuntes.class);
+                startActivity(act);
+            }
+        });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent act=new Intent(MainMenu.this,MainActivity.class);
+                startActivity(act);
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act=new Intent(MainMenu.this,Search.class);
+                startActivity(act);
+            }
+        });
+        busquedas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act=new Intent(MainMenu.this,SearchList.class);
                 startActivity(act);
             }
         });
