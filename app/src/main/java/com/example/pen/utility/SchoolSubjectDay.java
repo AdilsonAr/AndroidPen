@@ -5,14 +5,15 @@ import com.example.pen.model.SchoolSubject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import com.example.pen.model.SchoolSubject.WeekDay;
 
 /**
  * Esta clase no forma parte del modelo, solo es utilidad para usar
- * el SchoolSubject
+ * el SchoolSubjectDAO
  */
 public class SchoolSubjectDay {
     //region VARIABLES
-    private DayOfWeek dayOfWeek;
+    private WeekDay dayOfWeek;
     private List<SchoolSubject> subjectsInDay;
     //endregion
 
@@ -21,7 +22,7 @@ public class SchoolSubjectDay {
         subjectsInDay = new ArrayList<>();
     }
 
-    public SchoolSubjectDay(DayOfWeek dayOfWeek, List<SchoolSubject> subjectsInDay) {
+    public SchoolSubjectDay(WeekDay dayOfWeek, List<SchoolSubject> subjectsInDay) {
         this.dayOfWeek = dayOfWeek;
         this.subjectsInDay = subjectsInDay;
     }
@@ -29,11 +30,11 @@ public class SchoolSubjectDay {
 
     //region PROPIEDADES
 
-    public DayOfWeek getDayOfWeek() {
+    public WeekDay getWeekDay() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+    public void setWeekDay(WeekDay dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
@@ -48,15 +49,7 @@ public class SchoolSubjectDay {
     //endregion
 
     //region TIPOS ANIDADOS
-    public enum DayOfWeek{
-        LUNES,
-        MARTES,
-        MIERCOLES,
-        JUEVES,
-        VIERNES,
-        SABADO,
-        DOMINGO
-    }
+
     //endregion
 
     //region FUNCIONES
@@ -66,44 +59,59 @@ public class SchoolSubjectDay {
         salida = new ArrayList<>();
 
         salida.add(new SchoolSubjectDay());
-        salida.get(0).setDayOfWeek(DayOfWeek.LUNES);
-        salida.get(0).getSubjectsInDay().add(new SchoolSubject("Matematica", "Lunes", Calendar.getInstance().getTime()
-                , Calendar.getInstance().getTime()));
-        salida.get(0).getSubjectsInDay().add(new SchoolSubject("Ciencia", "Lunes", Calendar.getInstance().getTime()
-                , Calendar.getInstance().getTime()));
-
-        salida.add(new SchoolSubjectDay());
-        salida.get(1).setDayOfWeek(DayOfWeek.MARTES);
-        salida.get(1).getSubjectsInDay().add(new SchoolSubject("Sociales", "Martes", Calendar.getInstance().getTime()
-                , Calendar.getInstance().getTime()));
-        salida.get(1).getSubjectsInDay().add(new SchoolSubject("Religion", "Martes", Calendar.getInstance().getTime()
+        salida.get(0).setWeekDay(WeekDay.LUNES);
+        salida.get(0).getSubjectsInDay().add(new SchoolSubject("Matematica",
+                WeekDay.LUNES,
+                Calendar.getInstance().getTime(),
+                Calendar.getInstance().getTime()));
+        salida.get(0).getSubjectsInDay().add(new SchoolSubject("Ciencia",
+                WeekDay.LUNES, Calendar.getInstance().getTime()
                 , Calendar.getInstance().getTime()));
 
         salida.add(new SchoolSubjectDay());
-        salida.get(2).setDayOfWeek(DayOfWeek.MIERCOLES);
-        salida.get(2).getSubjectsInDay().add(new SchoolSubject("Lenguaje", "Miercoles", Calendar.getInstance().getTime()
+        salida.get(1).setWeekDay(WeekDay.MARTES);
+        salida.get(1).getSubjectsInDay().add(new SchoolSubject("Sociales",
+                WeekDay.MARTES,
+                Calendar.getInstance().getTime()
+                , Calendar.getInstance().getTime()));
+        salida.get(1).getSubjectsInDay().add(new SchoolSubject("Religion",
+                WeekDay.MARTES,
+                Calendar.getInstance().getTime()
                 , Calendar.getInstance().getTime()));
 
         salida.add(new SchoolSubjectDay());
-        salida.get(3).setDayOfWeek(DayOfWeek.JUEVES);
-        salida.get(3).getSubjectsInDay().add(new SchoolSubject("Artistica", "Jueves", Calendar.getInstance().getTime()
-                , Calendar.getInstance().getTime()));
-        salida.get(3).getSubjectsInDay().add(new SchoolSubject("Moral", "Jueves", Calendar.getInstance().getTime()
-                , Calendar.getInstance().getTime()));
-
-        salida.add(new SchoolSubjectDay());
-        salida.get(4).setDayOfWeek(DayOfWeek.VIERNES);
-        salida.get(4).getSubjectsInDay().add(new SchoolSubject("Fisica", "Viernes", Calendar.getInstance().getTime()
+        salida.get(2).setWeekDay(WeekDay.MIERCOLES);
+        salida.get(2).getSubjectsInDay().add(new SchoolSubject("Lenguaje",
+                WeekDay.MIERCOLES,
+                Calendar.getInstance().getTime()
                 , Calendar.getInstance().getTime()));
 
         salida.add(new SchoolSubjectDay());
-        salida.get(5).setDayOfWeek(DayOfWeek.VIERNES);
-        /*salida.get(5).getSubjectsInDay().add(new SchoolSubject("Test", "Sabado", Calendar.getInstance().getTime()
+        salida.get(3).setWeekDay(WeekDay.JUEVES);
+        salida.get(3).getSubjectsInDay().add(new SchoolSubject("Artistica",
+                WeekDay.JUEVES,
+                Calendar.getInstance().getTime()
+                , Calendar.getInstance().getTime()));
+        salida.get(3).getSubjectsInDay().add(new SchoolSubject("Moral",
+                WeekDay.JUEVES,
+                Calendar.getInstance().getTime()
+                , Calendar.getInstance().getTime()));
+
+        salida.add(new SchoolSubjectDay());
+        salida.get(4).setWeekDay(WeekDay.VIERNES);
+        salida.get(4).getSubjectsInDay().add(new SchoolSubject("Fisica",
+                WeekDay.VIERNES,
+                Calendar.getInstance().getTime()
+                , Calendar.getInstance().getTime()));
+
+        salida.add(new SchoolSubjectDay());
+        salida.get(5).setWeekDay(WeekDay.SABADO);
+        /*salida.get(5).getSubjectsInDay().add(new SchoolSubjectDAO("Test", "Sabado", Calendar.getInstance().getTime()
                 , Calendar.getInstance().getTime()));*/
 
         salida.add(new SchoolSubjectDay());
-        salida.get(6).setDayOfWeek(DayOfWeek.VIERNES);
-        /*salida.get(6).getSubjectsInDay().add(new SchoolSubject("Test", "Domingo", Calendar.getInstance().getTime()
+        salida.get(6).setWeekDay(WeekDay.DOMINGO);
+        /*salida.get(6).getSubjectsInDay().add(new SchoolSubjectDAO("Test", "Domingo", Calendar.getInstance().getTime()
                 , Calendar.getInstance().getTime()));*/
 
         return salida;

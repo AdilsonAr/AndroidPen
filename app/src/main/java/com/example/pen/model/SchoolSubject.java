@@ -3,29 +3,36 @@ package com.example.pen.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.time.DateTimeException;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-@Entity
+@Entity(tableName = "school_subject")
 public class SchoolSubject {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
-    private String dayOfWeek;
+    private WeekDay weekDay;
     private Date fromTime;
     private Date untilTime;
+
+    //region TIPOS ANIDADOS
+    public enum WeekDay {
+        LUNES,
+        MARTES,
+        MIERCOLES,
+        JUEVES,
+        VIERNES,
+        SABADO,
+        DOMINGO
+    }
+    //endregion
 
     //region CONSTRUCTORES
     public SchoolSubject() {
     }
 
-    public SchoolSubject(String name, String dayOfWeek, Date fromTime, Date untilTime) {
+    public SchoolSubject(String name, WeekDay weekDay, Date fromTime, Date untilTime) {
         this.name = name;
-        this.dayOfWeek = dayOfWeek;
+        this.weekDay = weekDay;
         this.fromTime = fromTime;
         this.untilTime = untilTime;
     }
@@ -48,12 +55,12 @@ public class SchoolSubject {
         this.name = name;
     }
 
-    public String getDayOfWeek() {
-        return dayOfWeek;
+    public WeekDay getWeekDay() {
+        return weekDay;
     }
 
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
+    public void setWeekDay(WeekDay weekDay) {
+        this.weekDay = weekDay;
     }
 
     public Date getFromTime() {

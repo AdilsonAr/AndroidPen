@@ -12,47 +12,45 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pen.R;
 import com.example.pen.utility.SchoolSubjectDay;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntFunction;
 
-public class SchoolScheduleDayAdapter extends RecyclerView.Adapter<SchoolScheduleDayAdapter.ViewHolder>{
+public class SchoolScheduleAdapter extends RecyclerView.Adapter<SchoolScheduleAdapter.ViewHolder>{
     //region VARIABLES
     private RecyclerView.RecycledViewPool rcvpViewPool
             = new RecyclerView.RecycledViewPool();
-    private final String [] dayList = {
-            "Lunes",
-            "Martes",
-            "Miercoles",
-            "Jueves",
-            "Viernes",
-            "Sabado",
-            "Domingo"};
     private List<SchoolSubjectDay> daysAndSubjects;
+    private ActionOnViewAtPosstion btnShowMoreOnClickListener;
     //endregion
 
     //region CONSTRUCTOR
 
-    public SchoolScheduleDayAdapter(List<SchoolSubjectDay> daysAndSubjects) {
+    public SchoolScheduleAdapter(List<SchoolSubjectDay> daysAndSubjects) {
         this.daysAndSubjects = daysAndSubjects;
     }
 
     //endregion
 
-    //region INNER_CLASS
+    //region INNER TYPES
     public class ViewHolder extends RecyclerView.ViewHolder{
         //variables
         private TextView txvDay;
-        private Button btnAdd;
+        private Button btnShowMore;
         private RecyclerView rcvSubjectList;
 
         public ViewHolder(View itemView){
             super(itemView);
             txvDay = itemView.findViewById(R.id.txvDay);
-            btnAdd = itemView.findViewById(R.id.btnAdd);
+            btnShowMore = itemView.findViewById(R.id.btnShowMore);
             rcvSubjectList = itemView.findViewById(R.id.rcvSubjectList);
         }//Fin ViewHolder
     }
-    //endregion INNER_CLASS
+
+    @FunctionalInterface
+    public interface ActionOnViewAtPosstion {
+        public void action(View v, int possition);
+    }
+    //endregion INNER TYPES
 
     //region PROPIEDADES
     public List<SchoolSubjectDay> getDaysAndSubjects() {
@@ -63,25 +61,38 @@ public class SchoolScheduleDayAdapter extends RecyclerView.Adapter<SchoolSchedul
         this.daysAndSubjects = daysAndSubjects;
     }
 
-    //endregion
+    public ActionOnViewAtPosstion getBtnShowMoreOnClickListener() {
+        return btnShowMoreOnClickListener;
+    }
+
+    public void setBtnShowMoreOnClickListener(ActionOnViewAtPosstion btnShowMoreOnClickListener) {
+        this.btnShowMoreOnClickListener = btnShowMoreOnClickListener;
+    }
+//endregion
 
     @NonNull
     @Override
-    public SchoolScheduleDayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SchoolScheduleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //variables
         View view;
-        SchoolScheduleDayAdapter.ViewHolder viewHolder;
+        SchoolScheduleAdapter.ViewHolder viewHolder;
 
         view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.crvly_school_schedule_day, parent, false);
-        viewHolder = new SchoolScheduleDayAdapter.ViewHolder(view);
+        viewHolder = new SchoolScheduleAdapter.ViewHolder(view);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SchoolScheduleDayAdapter.ViewHolder holder, int position) {
-        holder.txvDay.setText(dayList[position]);
+    public void onBindViewHolder(@NonNull SchoolScheduleAdapter.ViewHolder holder, int position) {
+        holder.txvDay.setText(getDaysAndSubjects().get(position).getWeekDay().name());
+        holder.btnShowMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnShowMoreOnClickListener.action(v, position);
+            }
+        });
 
         //si la posicion actual no excede el tamanno del arreglo
         if(getDaysAndSubjects().size() > position){
@@ -104,13 +115,14 @@ public class SchoolScheduleDayAdapter extends RecyclerView.Adapter<SchoolSchedul
             //establecer el adaptador en el reciclerview interno
             holder.rcvSubjectList.setLayoutManager(llm);
             holder.rcvSubjectList.setAdapter(ssa);
+            //esto permite que los recyclerview internos puedan existir (((
             holder.rcvSubjectList.setRecycledViewPool(rcvpViewPool);
-            holder.rcvSubjectList.setNestedScrollingEnabled(false);
+            holder.rcvSubjectList.setNestedScrollingEnabled(true);
         }
     }
 
     @Override
     public int getItemCount() {
-        return dayList.length;
+        return getDaysAndSubjects().size();
     }
 }
