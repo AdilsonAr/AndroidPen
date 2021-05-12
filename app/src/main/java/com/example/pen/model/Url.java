@@ -6,8 +6,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Url {
@@ -15,8 +13,6 @@ public class Url {
     private long id;
     private String time;
     private String url;
-    @Ignore
-    public static  final SimpleDateFormat SIMPLE_DATE_FORMAT= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public Url(String time, String url) {
         this.time=time;

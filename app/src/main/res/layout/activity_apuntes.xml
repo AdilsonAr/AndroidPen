@@ -6,13 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".activity.Apuntes">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TODO"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <FrameLayout
+        android:id="@+id/frame242"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4232"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4232"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/appBase"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/menu232"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@color/appBase"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/set2" />
+
+        <ImageButton
+            android:id="@+id/newApunte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@color/appBase"
+            android:scaleType="fitCenter"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
