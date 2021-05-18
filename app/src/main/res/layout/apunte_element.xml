@@ -22,44 +22,60 @@
             android:background="@android:color/white">
 
             <TextView
-                android:id="@+id/url"
+                android:id="@+id/nombre023"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:enabled="false"
-                android:paddingLeft="5dp"
-                android:text="url"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/searchAgain"
+                android:background="@drawable/rounded_corner2321"
+                android:text="file"
+                app:layout_constraintEnd_toStartOf="@+id/opciones023"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tipo023"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_corner1212"
+                android:text="tipo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fecha023"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nombre023" />
 
             <ImageButton
                 android:id="@+id/opciones023"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_red_light"
+                android:adjustViewBounds="true"
+                android:background="@android:color/holo_blue_light"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/nombre023"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_delete" />
+                app:srcCompat="@drawable/vertical" />
 
-            <ImageButton
-                android:id="@+id/searchAgain"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/fecha023"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:background="@color/appBase"
+                android:background="@drawable/rounded_corner1212"
+                android:text="fecha"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/opciones023"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_search" />
+                app:layout_constraintStart_toEndOf="@+id/tipo023"
+                app:layout_constraintTop_toBottomOf="@+id/nombre023" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

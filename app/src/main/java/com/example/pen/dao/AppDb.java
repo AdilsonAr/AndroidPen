@@ -5,13 +5,20 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
+import com.example.pen.model.ApunteKeyValue;
+import com.example.pen.model.ApunteSimple;
+import com.example.pen.model.KeyValue;
 import com.example.pen.model.SchoolSubject;
 import com.example.pen.model.Url;
-import com.example.pen.utility.CustomTypeConverters;
 
-@Database(entities = {Url.class, SchoolSubject.class}, version = 1, exportSchema = false)
-@TypeConverters({CustomTypeConverters.class})
+@Database(entities = {
+        Url.class, KeyValue.class, ApunteSimple.class, ApunteKeyValue.class,
+            SchoolSubject.class}
+        , version = 1, exportSchema = false)
 public abstract class AppDb extends RoomDatabase {
     public abstract UrlDAO urlDAO();
+    public abstract KeyValueDAO keyValueDAO();
+    public abstract ApunteSimpleDAO apunteSimpleDAO();
+    public abstract ApunteKeyValueDAO apunteKeyValueDAO();
     public abstract SchoolSubjectDao schoolSubjectDao();
 }

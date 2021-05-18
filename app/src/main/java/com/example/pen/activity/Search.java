@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.pen.R;
 import com.example.pen.dao.AppDb;
 import com.example.pen.model.Url;
+import com.example.pen.service.DateFormats;
 import com.example.pen.service.WebViewHandler;
 
 import java.text.SimpleDateFormat;
@@ -51,7 +52,7 @@ public class Search extends AppCompatActivity {
                 AppDb db= Room.databaseBuilder(Search.this, AppDb.class,"url").allowMainThreadQueries().build();
                 if(!url.equals("file:///android_asset/cannotload.html")){
                     Url urlSaved=db.urlDAO().findByUrl(url);
-                    SimpleDateFormat format= Url.SIMPLE_DATE_FORMAT;
+                    SimpleDateFormat format= DateFormats.DATE_TIME.getFormat();
                     if(urlSaved==null){
                         Url urlModel =new Url(format.format(new Date()),url);
                         db.urlDAO().insert(urlModel);

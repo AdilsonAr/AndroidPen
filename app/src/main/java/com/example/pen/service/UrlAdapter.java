@@ -1,6 +1,5 @@
 package com.example.pen.service;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +78,7 @@ public class UrlAdapter extends RecyclerView.Adapter<UrlAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             url = itemView.findViewById(R.id.url);
-            delete = itemView.findViewById(R.id.delete);
+            delete = itemView.findViewById(R.id.opciones023);
             searchAgain=itemView.findViewById(R.id.searchAgain);
         }
     }
