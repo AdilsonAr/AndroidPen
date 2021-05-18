@@ -7,12 +7,15 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.pen.R;
 import com.example.pen.dao.AppDb;
 import com.example.pen.model.SchoolSubject;
 import com.example.pen.service.SchoolSubjectAdapter;
+import com.example.pen.service.SchoolSubjectAdapterPlus;
+import com.example.pen.utility.IActionOnViewAtPossition;
 
 public class SchoolScheduleDay extends AppCompatActivity {
 
@@ -41,11 +44,17 @@ public class SchoolScheduleDay extends AppCompatActivity {
                 .allowMainThreadQueries().build();
 
         //poblar reciclerview
-        SchoolSubjectAdapter ssa;
+        SchoolSubjectAdapterPlus ssa;
 
-        ssa = new SchoolSubjectAdapter(db.schoolSubjectDao()
+        ssa = new SchoolSubjectAdapterPlus(db.schoolSubjectDao()
                 .getByDay(SchoolSubject.WeekDay
                         .valueOf(receivedDataBundle.getString("WeekDay"))));
+        ssa.setBtnOptionsOnClickListener(new IActionOnViewAtPossition() {
+            @Override
+            public void action(View v, int possition) {
+
+            }
+        });
 
         rcvSchlSchdlAssignments.setLayoutManager(new LinearLayoutManager(
                 this,
@@ -56,4 +65,6 @@ public class SchoolScheduleDay extends AppCompatActivity {
 
         db.close();
     }
+
+
 }

@@ -10,17 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.pen.R;
+import com.example.pen.utility.IActionOnViewAtPossition;
 import com.example.pen.utility.SchoolSubjectDay;
 
 import java.util.List;
-import java.util.function.IntFunction;
 
 public class SchoolScheduleAdapter extends RecyclerView.Adapter<SchoolScheduleAdapter.ViewHolder>{
     //region VARIABLES
     private RecyclerView.RecycledViewPool rcvpViewPool
             = new RecyclerView.RecycledViewPool();
     private List<SchoolSubjectDay> daysAndSubjects;
-    private ActionOnViewAtPosstion btnShowMoreOnClickListener;
+    private IActionOnViewAtPossition btnShowMoreOnClickListener;
     //endregion
 
     //region CONSTRUCTOR
@@ -46,10 +46,6 @@ public class SchoolScheduleAdapter extends RecyclerView.Adapter<SchoolScheduleAd
         }//Fin ViewHolder
     }
 
-    @FunctionalInterface
-    public interface ActionOnViewAtPosstion {
-        public void action(View v, int possition);
-    }
     //endregion INNER TYPES
 
     //region PROPIEDADES
@@ -61,11 +57,11 @@ public class SchoolScheduleAdapter extends RecyclerView.Adapter<SchoolScheduleAd
         this.daysAndSubjects = daysAndSubjects;
     }
 
-    public ActionOnViewAtPosstion getBtnShowMoreOnClickListener() {
+    public IActionOnViewAtPossition getBtnShowMoreOnClickListener() {
         return btnShowMoreOnClickListener;
     }
 
-    public void setBtnShowMoreOnClickListener(ActionOnViewAtPosstion btnShowMoreOnClickListener) {
+    public void setBtnShowMoreOnClickListener(IActionOnViewAtPossition btnShowMoreOnClickListener) {
         this.btnShowMoreOnClickListener = btnShowMoreOnClickListener;
     }
 //endregion

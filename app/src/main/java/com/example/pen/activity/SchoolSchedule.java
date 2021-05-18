@@ -15,6 +15,7 @@ import com.example.pen.dao.AppDb;
 import com.example.pen.dao.SchoolSubjectDao;
 import com.example.pen.model.SchoolSubject;
 import com.example.pen.service.SchoolScheduleAdapter;
+import com.example.pen.utility.IActionOnViewAtPossition;
 import com.example.pen.utility.SchoolSubjectDay;
 
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class SchoolSchedule extends AppCompatActivity {
 
         //asignar un adaptador a rcvSchoolSchedule
         schsad = new SchoolScheduleAdapter(schoolSubjectDays);
-        schsad.setBtnShowMoreOnClickListener(new SchoolScheduleAdapter.ActionOnViewAtPosstion() {
+        schsad.setBtnShowMoreOnClickListener(new IActionOnViewAtPossition() {
             @Override
             public void action(View v, int possition) {
                 Intent intentShowMoreOfDay;

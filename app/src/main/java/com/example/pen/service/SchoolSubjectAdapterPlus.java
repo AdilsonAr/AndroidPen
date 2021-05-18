@@ -3,25 +3,28 @@ package com.example.pen.service;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pen.model.SchoolSubject;
 import com.example.pen.R;
+import com.example.pen.model.SchoolSubject;
+import com.example.pen.utility.IActionOnViewAtPossition;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class SchoolSubjectAdapter extends RecyclerView.Adapter<SchoolSubjectAdapter.ViewHolder>{
+public class SchoolSubjectAdapterPlus extends RecyclerView.Adapter<SchoolSubjectAdapterPlus.ViewHolder>{
     //region VARIABLES
     private List<SchoolSubject> subjectList;
+    private IActionOnViewAtPossition btnOptionsOnClickListener;
     //endregion
 
     //region CONSTRUCTOR
-    public SchoolSubjectAdapter(List<SchoolSubject> subjectList) {
+    public SchoolSubjectAdapterPlus(List<SchoolSubject> subjectList) {
         this.subjectList = subjectList;
     }
     //endregion
@@ -32,12 +35,14 @@ public class SchoolSubjectAdapter extends RecyclerView.Adapter<SchoolSubjectAdap
         private TextView txvSubject;
         private TextView txvFrom;
         private TextView txvUntil;
+        private Button btnOptions;
 
         public ViewHolder(View itemView){
             super(itemView);
-            txvSubject = itemView.findViewById(R.id.txvSsdaSubject);
-            txvFrom = itemView.findViewById(R.id.txvSsdaFrom);
-            txvUntil = itemView.findViewById(R.id.txvSsdaUntil);
+            txvSubject = itemView.findViewById(R.id.txvSsdapSubject);
+            txvFrom = itemView.findViewById(R.id.txvSsdapFrom);
+            txvUntil = itemView.findViewById(R.id.txvSsdapUntil);
+            btnOptions = itemView.findViewById(R.id.btnSsdapOptions);
         }//Fin ViewHolder
     }
     //endregion INNER_CLASS
@@ -52,29 +57,43 @@ public class SchoolSubjectAdapter extends RecyclerView.Adapter<SchoolSubjectAdap
         this.subjectList = subjectList;
     }
 
+    public IActionOnViewAtPossition getBtnOptionsOnClickListener() {
+        return btnOptionsOnClickListener;
+    }
+
+    public void setBtnOptionsOnClickListener(IActionOnViewAtPossition btnOptionsOnClickListener) {
+        this.btnOptionsOnClickListener = btnOptionsOnClickListener;
+    }
+
     //endregion
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SchoolSubjectAdapterPlus.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //variables
         View view;
-        ViewHolder viewHolder;
+        SchoolSubjectAdapterPlus.ViewHolder viewHolder;
 
         view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.crvly_school_schedule_day_appointment, parent, false);
-        viewHolder = new ViewHolder(view);
+                .inflate(R.layout.crvly_school_schedule_day_appointment_plus, parent, false);
+        viewHolder = new SchoolSubjectAdapterPlus.ViewHolder(view);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SchoolSubjectAdapterPlus.ViewHolder holder, int position) {
         DateFormat df = new SimpleDateFormat("hh:mm");
 
         holder.txvSubject.setText(getSubjectList().get(position).getName());
         holder.txvFrom.setText("Desde: "+df.format(getSubjectList().get(position).getFromTime()));
         holder.txvUntil.setText("Hasta: "+df.format(getSubjectList().get(position).getUntilTime()));
+        holder.btnOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnOptionsOnClickListener.action(v, position);
+            }
+        });
     }
 
     @Override
