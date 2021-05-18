@@ -10,11 +10,13 @@ import com.example.pen.model.ApunteSimple;
 import com.example.pen.model.KeyValue;
 import com.example.pen.model.SchoolSubject;
 import com.example.pen.model.Url;
+import com.example.pen.utility.CustomTypeConverters;
 
 @Database(entities = {
         Url.class, KeyValue.class, ApunteSimple.class, ApunteKeyValue.class,
             SchoolSubject.class}
         , version = 1, exportSchema = false)
+@TypeConverters({CustomTypeConverters.class})
 public abstract class AppDb extends RoomDatabase {
     public abstract UrlDAO urlDAO();
     public abstract KeyValueDAO keyValueDAO();

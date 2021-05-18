@@ -41,31 +41,8 @@ public class SchoolSchedule extends AppCompatActivity {
         //variables
         RecyclerView rcvSchoolSchedule;
         Button btnTmp;
-        AppDb db;
 
         //inicializacion
-        //base de datos
-        db = Room.databaseBuilder(SchoolSchedule.this,
-                AppDb.class,"db_pen").allowMainThreadQueries().build();
-
-        //este boton e solo para insertar datos de prueba 1 vez
-        btnTmp = findViewById(R.id.btnTmp);
-        btnTmp.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                    List<SchoolSubjectDay> listToInsert;
-                    SchoolSubjectDao ssDao;
-
-                    listToInsert = SchoolSubjectDay.generateSchedule();
-                    ssDao = db.schoolSubjectDao();
-                    listToInsert.forEach(schoolSubjectDay -> {
-                        schoolSubjectDay.getSubjectsInDay().forEach(sc ->{
-                            ssDao.insert(sc);
-                        });
-                    });
-                }
-        });//fin boton de prueba
-
         //reciclerview y elementos relacionados
         rcvSchoolSchedule = findViewById(R.id.rcvSchoolSchedule);
         rcvSchoolSchedule.setLayoutManager(new LinearLayoutManager(this));
@@ -75,34 +52,71 @@ public class SchoolSchedule extends AppCompatActivity {
         List<SchoolSubject> schoolSubjects;;
         SchoolScheduleAdapter schsad;
 
-        //armar los datos y ordenarlos ppor dia atravez de la clase de
-        //utilidad SchoolSubjectDays
-        schoolSubjectDays = new ArrayList<>();
-        for(SchoolSubject.WeekDay day:SchoolSubject.WeekDay.values()){
-            SchoolSubjectDay ssday;
+        // armar los datos y ordenarlos ppor dia atravez de la clase de
+        // utilidad SchoolSubjectDays que contendra los dias y las
+        //materias de esos dias
+        {
+            AppDb db;
 
-            schoolSubjects = db.schoolSubjectDao().getByDay(day);
-            ssday = new SchoolSubjectDay(day, schoolSubjects);
-            schoolSubjectDays.add(ssday);
-        }
+            schoolSubjectDays = new ArrayList<>();
+            db = Room.databaseBuilder(SchoolSchedule.this,
+                    AppDb.class,"db_pen").allowMainThreadQueries().build();
+            for(SchoolSubject.WeekDay day:SchoolSubject.WeekDay.values()){
+                SchoolSubjectDay ssday;
+
+                schoolSubjects = db.schoolSubjectDao().getByDay(day);
+                ssday = new SchoolSubjectDay(day, schoolSubjects);
+                schoolSubjectDays.add(ssday);
+            }
+            //cerrar base
+            db.close();
+        } //fin de armar los datos y ordenarlos
 
         //asignar un adaptador a rcvSchoolSchedule
-        schsad = new SchoolScheduleAdapter(schoolSubjectDays);
-        schsad.setBtnShowMoreOnClickListener(new IActionOnViewAtPossition() {
-            @Override
-            public void action(View v, int possition) {
-                Intent intentShowMoreOfDay;
-                Bundle bundleData;
+        {
 
-                intentShowMoreOfDay = new Intent(self, SchoolScheduleDay.class);
-                intentShowMoreOfDay.putExtra("WeekDay"
-                        , schsad.getDaysAndSubjects().get(possition).getWeekDay().name());
-                startActivity(intentShowMoreOfDay);
-            }
-        });
-        rcvSchoolSchedule.setAdapter(schsad);
+            schsad = new SchoolScheduleAdapter(schoolSubjectDays);
+            schsad.setBtnShowMoreOnClickListener(new IActionOnViewAtPossition() {
+                @Override
+                public void action(View v, int possition) {
+                    Intent intentShowMoreOfDay;
+                    Bundle bundleData;
 
-        //cerrar base
-        db.close();
+                    intentShowMoreOfDay = new Intent(self, SchoolScheduleDay.class);
+                    intentShowMoreOfDay.putExtra("WeekDay"
+                            , schsad.getDaysAndSubjects().get(possition).getWeekDay().name());
+                    startActivity(intentShowMoreOfDay);
+                }
+            });
+
+            //establecer el adaptador de los datos
+            rcvSchoolSchedule.setAdapter(schsad);
+        } //fin asignar un adaptador a rcvScholSchedule
+
+        //eventos
+        {
+            //este boton e solo para insertar datos de prueba 1 vez
+            btnTmp = findViewById(R.id.btnTmp);
+            btnTmp.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    List<SchoolSubjectDay> listToInsert;
+                    SchoolSubjectDao ssDao;
+                    AppDb db;
+
+                    db = Room.databaseBuilder(SchoolSchedule.this,
+                            AppDb.class,"db_pen").allowMainThreadQueries().build();
+                    listToInsert = SchoolSubjectDay.generateSchedule();
+                    ssDao = db.schoolSubjectDao();
+                    listToInsert.forEach(schoolSubjectDay -> {
+                        schoolSubjectDay.getSubjectsInDay().forEach(sc ->{
+                            ssDao.insert(sc);
+                        });
+                    });
+                    //cerrar base
+                    db.close();
+                }
+            });//fin boton de prueba
+        }
     }
 }
