@@ -2,48 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/diagId"
-    android:background="@color/appBase"
+    android:id="@+id/cLay678"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:background="@color/appBase"
     tools:context=".fragments.NoteOption">
 
     <TextView
-        android:id="@+id/simpleId"
+        android:id="@+id/editar678"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rounded_cornertextbtn"
-        android:text="texto plano"
+        android:text="Editar"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/keyValueId"
-        app:layout_constraintStart_toStartOf="@+id/keyValueId"
-        app:layout_constraintTop_toBottomOf="@+id/tittle" />
+        app:layout_constraintEnd_toEndOf="@+id/eliminar678"
+        app:layout_constraintStart_toStartOf="@+id/eliminar678"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/keyValueId"
+        android:id="@+id/eliminar678"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_cornertextbtn"
-        android:text="Preguntas y respuestas"
+        android:text="Eliminar"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpleId" />
-
-    <TextView
-        android:id="@+id/tittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Tipo de Apunte"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editar678" />
 </androidx.constraintlayout.widget.ConstraintLayout>

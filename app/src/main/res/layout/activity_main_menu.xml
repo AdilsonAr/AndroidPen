@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="@+id/busquedas">
 
         <ImageButton
-            android:id="@+id/back"
+            android:id="@+id/back8778"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"

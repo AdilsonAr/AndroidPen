@@ -3,9 +3,10 @@ package com.example.pen.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 @Entity
-public class ApunteKeyValue {
+public class ApunteKeyValue implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String fecha;

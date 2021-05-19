@@ -3,9 +3,10 @@ package com.example.pen.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 @Entity
-public class ApunteSimple {
+public class ApunteSimple implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String fecha;
@@ -16,8 +17,7 @@ public class ApunteSimple {
     public ApunteSimple() {
     }
 
-    public ApunteSimple(long id, String fecha, String nombre, String tipo, String content) {
-        this.id = id;
+    public ApunteSimple(String fecha, String nombre, String tipo, String content) {
         this.fecha = fecha;
         this.nombre = nombre;
         this.tipo = tipo;

@@ -14,7 +14,7 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        ImageButton back=findViewById(R.id.back);
+        ImageButton back=findViewById(R.id.back8778);
         ImageButton apuntes=findViewById(R.id.apuntes);
         ImageButton search=findViewById(R.id.busca);
         ImageButton busquedas=findViewById(R.id.busquedas);

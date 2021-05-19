@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pen">
-        <activity android:name=".activity.SearchList"></activity>
+        <activity android:name=".activity.ApunteView"></activity>
+        <activity android:name=".activity.Upsert" />
+        <activity android:name=".activity.SearchList" />
         <activity android:name=".activity.Apuntes" />
         <activity android:name=".activity.Search" />
         <activity android:name=".activity.MainMenu" />

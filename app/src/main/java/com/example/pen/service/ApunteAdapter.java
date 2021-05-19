@@ -56,6 +56,17 @@ public class ApunteAdapter extends RecyclerView.Adapter<ApunteAdapter.ViewHolder
                 onClickListener.opcionesOnClick(v, position);
             }
         });
+
+        View.OnClickListener listener=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.itemOnClick(v, position);
+            }
+        };
+
+        holder.nombre.setOnClickListener(listener);
+        holder.tipo.setOnClickListener(listener);
+        holder.fecha.setOnClickListener(listener);
     }
 
     @Override
@@ -80,5 +91,6 @@ public class ApunteAdapter extends RecyclerView.Adapter<ApunteAdapter.ViewHolder
 
     public interface ApunteAdapterListener{
         void opcionesOnClick(View v, int position);
+        void itemOnClick(View v, int position);
     }
 }

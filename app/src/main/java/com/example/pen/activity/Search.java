@@ -21,9 +21,6 @@ import com.example.pen.service.DateFormats;
 import com.example.pen.service.WebViewHandler;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Search extends AppCompatActivity {
@@ -32,7 +29,7 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        ImageButton back=findViewById(R.id.back);
+        ImageButton back=findViewById(R.id.back8778);
         ImageButton menu =findViewById(R.id.menu);
         ImageButton go = findViewById(R.id.go);
         WebView wv=findViewById(R.id.wv);

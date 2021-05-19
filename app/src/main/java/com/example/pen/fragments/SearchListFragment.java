@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 
 import com.example.pen.R;
 import com.example.pen.activity.Search;
+import com.example.pen.activity.SearchList;
 import com.example.pen.dao.AppDb;
 import com.example.pen.model.Url;
 import com.example.pen.service.AlertDialogHandler;
@@ -27,13 +28,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 public class SearchListFragment extends Fragment {
-    View view;
+    private View view;
+    private SearchList.Counter counter;
+
+    public void setCounter(SearchList.Counter counter) {
+        this.counter = counter;
+    }
+
     public SearchListFragment() {
         // Required empty public constructor
     }
 
-    public static SearchListFragment newInstance(String param1, String param2) {
+    public static SearchListFragment newInstance(SearchList.Counter counter) {
         SearchListFragment fragment = new SearchListFragment();
+        fragment.setCounter(counter);
         return fragment;
     }
 
@@ -83,7 +91,11 @@ public class SearchListFragment extends Fragment {
                     db.urlDAO().delete(deleting);
                     listFromDb.remove(position);
                     listToShow.remove(position);
-                    urlAdapter.notifyDataSetChanged();
+                    if(urlAdapter.getItemCount()>0){
+                        urlAdapter.notifyDataSetChanged();
+                    }else{
+                        counter.count(urlAdapter.getItemCount());
+                    }
                 },
                         ()->{});
                 alertDialogHandler.run();

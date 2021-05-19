@@ -16,21 +16,20 @@ import com.example.pen.fragments.EmptyFragment;
 import com.example.pen.fragments.NoteOption;
 
 public class Apuntes extends AppCompatActivity {
-
+    private Counter counter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apuntes);
         ImageButton menu=findViewById(R.id.menu232);
         ImageButton newApunte=findViewById(R.id.newApunte);
-        AppDb dbCount= Room.databaseBuilder(Apuntes.this, AppDb.class,"url").allowMainThreadQueries().build();
-        int ap1 = dbCount.apunteKeyValueDAO().findAll().size();
-        int ap2 = dbCount.apunteSimpleDAO().findAll().size();
-        if((ap1+ap2)>0){
-            getSupportFragmentManager().beginTransaction().add(R.id.frame242,new ApuntesFragment()).commit();
-        }else{
-            getSupportFragmentManager().beginTransaction().add(R.id.frame242,new EmptyFragment()).commit();
-        }
+        AppDb dbCount1= Room.databaseBuilder(Apuntes.this, AppDb.class,"apunteKeyValue").allowMainThreadQueries().build();
+        AppDb dbCount2= Room.databaseBuilder(Apuntes.this, AppDb.class,"apunteSimple").allowMainThreadQueries().build();
+        int ap1 = dbCount1.apunteKeyValueDAO().findAll().size();
+        int ap2 = dbCount2.apunteSimpleDAO().findAll().size();
+        counter=new Counter();
+        counter.count(ap1+ap2);
+
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,5 +45,14 @@ public class Apuntes extends AppCompatActivity {
                 opt.show(fm, "fragment_note_option");
             }
         });
+    }
+    public  class Counter{
+        public void count(int n){
+            if((n)>0){
+                getSupportFragmentManager().beginTransaction().add(R.id.frame242, ApuntesFragment.newInstance(counter)).commit();
+            }else{
+                getSupportFragmentManager().beginTransaction().add(R.id.frame242,new EmptyFragment()).commit();
+            }
+        }
     }
 }
