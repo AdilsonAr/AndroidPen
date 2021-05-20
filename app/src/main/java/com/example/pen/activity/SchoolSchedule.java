@@ -57,10 +57,15 @@ public class SchoolSchedule extends AppCompatActivity {
         //materias de esos dias
         {
             AppDb db;
+            AppDb db2;
 
             schoolSubjectDays = new ArrayList<>();
             db = Room.databaseBuilder(SchoolSchedule.this,
                     AppDb.class,"db_pen").allowMainThreadQueries().build();
+
+            db2 = Room.databaseBuilder(SchoolSchedule.this,
+                    AppDb.class,"db_pen").allowMainThreadQueries().build();
+
             for(SchoolSubject.WeekDay day:SchoolSubject.WeekDay.values()){
                 SchoolSubjectDay ssday;
 

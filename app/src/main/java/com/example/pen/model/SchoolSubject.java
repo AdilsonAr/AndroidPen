@@ -79,7 +79,7 @@ public class SchoolSubject {
     public void setUntilTime(Date untilTime) {
         this.untilTime = untilTime;
     }
-//endregion
+    //endregion
 
     //region FUNCIONES_PRUEBA
     //endregion
