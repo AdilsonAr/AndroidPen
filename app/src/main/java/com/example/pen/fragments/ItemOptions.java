@@ -18,9 +18,12 @@ import com.example.pen.model.ApunteKeyValue;
 import com.example.pen.model.ApunteSimple;
 import com.example.pen.service.AlertDialogHandler;
 
+import java.util.function.Function;
+
 public class ItemOptions extends DialogFragment {
     private int p;
     private ApuntesFragment.ApuntesOp op;
+    private final Runnable CLOSE=()->dismiss();
 
     public void setP(int p) {
         this.p = p;
@@ -58,6 +61,7 @@ public class ItemOptions extends DialogFragment {
             @Override
             public void onClick(View v) {
                 op.editApunte(p);
+                CLOSE.run();
             }
         });
 
@@ -65,6 +69,7 @@ public class ItemOptions extends DialogFragment {
             @Override
             public void onClick(View v) {
                 op.deleteApunte(p);
+                CLOSE.run();
             }
         });
     }

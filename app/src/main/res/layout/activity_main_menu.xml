@@ -51,23 +51,4 @@
         app:layout_constraintTop_toBottomOf="@+id/apuntes"
         app:srcCompat="@drawable/busquedas2" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/appBase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/busquedas">
-
-        <ImageButton
-            android:id="@+id/back8778"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:background="@color/appBase"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/vertical" />
-    </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

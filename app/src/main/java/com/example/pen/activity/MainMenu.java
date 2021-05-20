@@ -27,14 +27,6 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent act=new Intent(MainMenu.this,MainActivity.class);
-                startActivity(act);
-            }
-        });
-
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
