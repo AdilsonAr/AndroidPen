@@ -18,6 +18,22 @@ public class KeyValueAdapter extends RecyclerView.Adapter<KeyValueAdapter.ViewHo
     public KeyValueAdapterListener listener;
     private List<KeyValue> list;
 
+    public KeyValueAdapterListener getListener() {
+        return listener;
+    }
+
+    public void setListener(KeyValueAdapterListener listener) {
+        this.listener = listener;
+    }
+
+    public List<KeyValue> getList() {
+        return list;
+    }
+
+    public void setList(List<KeyValue> list) {
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,11 +53,28 @@ public class KeyValueAdapter extends RecyclerView.Adapter<KeyValueAdapter.ViewHo
                 listener.deleteOnClick(v,position);
             }
         });
+        holder.key.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    list.get(position).setKey(holder.key.getText().toString());
+                }
+            }
+        });
+
+        holder.value.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && getItemCount()>0){
+                    list.get(position).setValue(holder.value.getText().toString());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

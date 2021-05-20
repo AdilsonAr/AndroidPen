@@ -7,9 +7,14 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.pen.R;
+import com.example.pen.fragments.FragmentApunteKeyValueView;
 import com.example.pen.fragments.FragmentApunteSimpleView;
 import com.example.pen.model.ApunteKeyValue;
 import com.example.pen.model.ApunteSimple;
+import com.example.pen.model.KeyValue;
+import com.example.pen.model.ListWrapper;
+
+import java.util.List;
 
 public class ApunteView extends AppCompatActivity {
 
@@ -24,10 +29,11 @@ public class ApunteView extends AppCompatActivity {
             ApunteSimple apunte=(ApunteSimple)b.get("apunte");
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame8778, FragmentApunteSimpleView.newInstance(apunte)).commit();
-            //llamar el fragment
         }else{
             ApunteKeyValue apunte=(ApunteKeyValue)b.get("apunte");
-            //llamar el fragment
+            List<KeyValue> list=((ListWrapper<KeyValue>)b.get("list")).getList();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame8778, FragmentApunteKeyValueView.newInstance(apunte.getNombre(),list)).commit();
         }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

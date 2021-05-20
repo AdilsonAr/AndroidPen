@@ -16,8 +16,7 @@ public class ApunteKeyValue implements Serializable {
     public ApunteKeyValue() {
     }
 
-    public ApunteKeyValue(long id, String fecha, String nombre, String tipo) {
-        this.id = id;
+    public ApunteKeyValue(String fecha, String nombre, String tipo) {
         this.fecha = fecha;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -53,5 +52,15 @@ public class ApunteKeyValue implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "ApunteKeyValue{" +
+                "id=" + id +
+                ", fecha='" + fecha + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }

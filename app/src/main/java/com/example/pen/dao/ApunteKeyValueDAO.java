@@ -15,8 +15,10 @@ import java.util.List;
 public interface ApunteKeyValueDAO {
     @Query("select * from apunteKeyValue")
     public abstract List<ApunteKeyValue> findAll();
+    @Query("select * from apunteKeyValue where id=:miid")
+    public abstract ApunteKeyValue findById(long miid);
     @Insert
-    public abstract void insert(ApunteKeyValue apunteKeyValue);
+    public abstract long insert(ApunteKeyValue apunteKeyValue);
     @Update
     public abstract void update(ApunteKeyValue apunteKeyValue);
     @Delete

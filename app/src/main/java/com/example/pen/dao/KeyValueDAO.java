@@ -13,6 +13,8 @@ public interface KeyValueDAO {
     public abstract List<KeyValue> findAll();
     @Query("select * from keyValue where idApunte=:idApunte")
     public abstract List<KeyValue> findByIdApunte(long idApunte);
+    @Query("select * from keyValue where id=:id")
+    public abstract KeyValue findById(long id);
     @Insert
     public abstract void insert(KeyValue keyValue);
     @Update

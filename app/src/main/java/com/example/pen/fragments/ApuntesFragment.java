@@ -22,6 +22,8 @@ import com.example.pen.dao.AppDb;
 import com.example.pen.model.ApunteFace;
 import com.example.pen.model.ApunteKeyValue;
 import com.example.pen.model.ApunteSimple;
+import com.example.pen.model.KeyValue;
+import com.example.pen.model.ListWrapper;
 import com.example.pen.service.AlertDialogHandler;
 import com.example.pen.service.ApunteAdapter;
 import com.example.pen.service.ApunteService;
@@ -107,8 +109,14 @@ public class ApuntesFragment extends Fragment {
                     in.putExtra("fragment","simple");
                     in.putExtra("apunte",(ApunteSimple)optional.get());
                 }else if(optional.get() instanceof ApunteKeyValue){
+                    ApunteKeyValue akv=(ApunteKeyValue)optional.get();
                     in.putExtra("fragment","keyValue");
-                    in.putExtra("apunte",(ApunteKeyValue)optional.get());
+                    in.putExtra("apunte",akv);
+                    AppDb dbItems =Room.databaseBuilder(getActivity(),AppDb.class,"keyValue").allowMainThreadQueries().build();
+                    List<KeyValue> list=dbItems.keyValueDAO().findByIdApunte(akv.getId());
+                    ListWrapper<KeyValue> wrapper=new ListWrapper<>();
+                    wrapper.setList(list);
+                    in.putExtra("list",wrapper);
                 }
                 startActivity(in);
             }
@@ -138,6 +146,8 @@ public class ApuntesFragment extends Fragment {
     };
 
     public class ApuntesOp{
+        AppDb dbItems =Room.databaseBuilder(getActivity(),AppDb.class,"keyValue").allowMainThreadQueries().build();
+
         public void editApunte(int position){
             Intent in=new Intent(getActivity(), Upsert.class);
             Optional<?> optional=findAnyApunte.apply(position);
@@ -145,8 +155,13 @@ public class ApuntesFragment extends Fragment {
                 in.putExtra("task","ApunteSimple");
                 in.putExtra("entity",(ApunteSimple)optional.get());
             }else if(optional.get() instanceof ApunteKeyValue){
+                ApunteKeyValue akv=(ApunteKeyValue)optional.get();
+                List<KeyValue> list=dbItems.keyValueDAO().findByIdApunte(akv.getId());
+                ListWrapper<KeyValue> wrapper=new ListWrapper<>();
+                wrapper.setList(list);
                 in.putExtra("task","ApunteKeyValue");
-                in.putExtra("entity",(ApunteKeyValue)optional.get());
+                in.putExtra("list",wrapper);
+                in.putExtra("entity",akv);
             }
             startActivity(in);
         }
@@ -163,6 +178,9 @@ public class ApuntesFragment extends Fragment {
                         dbSimple.apunteSimpleDAO().delete(a);
                     }else if(optional.get() instanceof ApunteKeyValue){
                         ApunteKeyValue a=(ApunteKeyValue)optional.get();
+                        List<KeyValue> l=dbItems.keyValueDAO().findByIdApunte(a.getId());
+                        l.forEach(x->dbItems.keyValueDAO().delete(x));
+                        dbKeyValue.apunteKeyValueDAO().delete(a);
                     }
                     facesEffectivelyFinal.remove(position);
                     if(adapter.getItemCount()>0){

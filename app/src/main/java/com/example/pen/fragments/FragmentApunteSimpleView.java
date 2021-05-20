@@ -40,7 +40,7 @@ public class FragmentApunteSimpleView extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_apunte_simple_view, container, false);
         TextView nombre=v.findViewById(R.id.nombre4547);
-        TextView contenido=v.findViewById(R.id.contenido4547);
+        TextView contenido=v.findViewById(R.id.respuesta1212);
         nombre.setText(apunte.getNombre());
         contenido.setText(apunte.getContent());
         return v;

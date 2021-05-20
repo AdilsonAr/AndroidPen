@@ -3,8 +3,10 @@ package com.example.pen.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class KeyValue {
+public class KeyValue implements Serializable{
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long idApunte;
@@ -14,8 +16,7 @@ public class KeyValue {
     public KeyValue() {
     }
 
-    public KeyValue(long id, long idApunte, String key, String value) {
-        this.id = id;
+    public KeyValue(long idApunte, String key, String value) {
         this.idApunte = idApunte;
         this.key = key;
         this.value = value;
@@ -51,5 +52,15 @@ public class KeyValue {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "KeyValue{" +
+                "id=" + id +
+                ", idApunte=" + idApunte +
+                ", key='" + key + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

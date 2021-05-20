@@ -6,6 +6,8 @@ import com.example.pen.fragments.FragmentApunteKeyValueUpsert;
 import com.example.pen.fragments.FragmentApunteSimpleUpsert;
 import com.example.pen.model.ApunteKeyValue;
 import com.example.pen.model.ApunteSimple;
+import com.example.pen.model.KeyValue;
+import com.example.pen.model.ListWrapper;
 import com.example.pen.model.UpsertFragment;
 
 import android.os.Bundle;
@@ -13,9 +15,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class Upsert extends AppCompatActivity {
     private String task;
     private Object entity;
+    private List<KeyValue> list;
     private UpsertFragment upsertFragment;
 
     @Override
@@ -44,13 +49,14 @@ public class Upsert extends AppCompatActivity {
                 break;
             case "ApunteKeyValue":
                 if(entity!=null){
+                    list=((ListWrapper<KeyValue>)b.get("list")).getList();
                     FragmentApunteKeyValueUpsert fragment=FragmentApunteKeyValueUpsert.newInstance("update"
-                            ,(ApunteKeyValue)entity);
+                            ,(ApunteKeyValue)entity, list);
                     upsertFragment=fragment;
                     getSupportFragmentManager().beginTransaction().add(R.id.frame3434, fragment).commit();
                 }else{
                     FragmentApunteKeyValueUpsert fragment=FragmentApunteKeyValueUpsert.newInstance("create"
-                            ,null);
+                            ,null, null);
                     upsertFragment=fragment;
                     getSupportFragmentManager().beginTransaction().add(R.id.frame3434, fragment).commit();
                 }

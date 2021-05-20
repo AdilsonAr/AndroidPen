@@ -47,6 +47,7 @@ public class NoteOption extends DialogFragment {
                 in.putExtra("task","ApunteSimple");
                 in.putExtra("entity", a);
                 startActivity(in);
+                dismiss();
             }
         });
 
@@ -58,6 +59,7 @@ public class NoteOption extends DialogFragment {
                 in.putExtra("task","ApunteKeyValue");
                 in.putExtra("entity", a);
                 startActivity(in);
+                dismiss();
             }
         });
     }
