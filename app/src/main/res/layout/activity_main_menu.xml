@@ -46,9 +46,33 @@
         android:adjustViewBounds="true"
         android:background="@android:color/white"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="@+id/apuntes"
+        app:layout_constraintEnd_toStartOf="@+id/agenda"
         app:layout_constraintStart_toStartOf="@+id/apuntes"
         app:layout_constraintTop_toBottomOf="@+id/apuntes"
         app:srcCompat="@drawable/busquedas2" />
+
+    <ImageButton
+        android:id="@+id/agenda"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@android:color/white"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/busquedas"
+        app:layout_constraintTop_toBottomOf="@+id/busca"
+        app:srcCompat="@drawable/agenda_temp" />
+
+    <ImageButton
+        android:id="@+id/horario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@android:color/white"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/busquedas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/busquedas"
+        app:srcCompat="@drawable/horario_temp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
