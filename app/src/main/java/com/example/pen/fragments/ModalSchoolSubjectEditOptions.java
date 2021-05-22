@@ -13,16 +13,20 @@ import com.example.pen.R;
 import com.example.pen.utility.AsyncTaskCallBack;
 
 /**
- * version: 1.0
- * ultima modificacion: 19/5/21
+ * version: 1.0.1
+ * ultima modificacion: 12/5/21
  * descripcion:
  * Funciona similar al Fragment "NoteOption"
  * para confirmar la eliminaciond e una asignatura
  * del horario de clases
+ * --------
+ * -anadiddo listener para el boton cancelar
  */
 public class ModalSchoolSubjectEditOptions extends DialogFragment {
     private Runnable txvEditOnClickListener;
     private Runnable txvDeleteOnClickListener;
+    private Runnable txvCancelOnClickListener;
+
 
     //region CONSTRUCTORES
     public ModalSchoolSubjectEditOptions() {
@@ -48,6 +52,14 @@ public class ModalSchoolSubjectEditOptions extends DialogFragment {
         this.txvDeleteOnClickListener = txvDeleteOnClickListener;
     }
 
+    public Runnable getTxvCancelOnClickListener() {
+        return txvCancelOnClickListener;
+    }
+
+    public void setTxvCancelOnClickListener(Runnable txvCancelOnClickListener) {
+        this.txvCancelOnClickListener = txvCancelOnClickListener;
+    }
+
     //endregion PROPIEDADES
 
     public static ModalSchoolSubjectEditOptions newInstance() {
@@ -67,6 +79,8 @@ public class ModalSchoolSubjectEditOptions extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         TextView txvEdit = view.findViewById(R.id.txvFgm_msseoEdit);
         TextView txvDelete = view.findViewById(R.id.txvFgm_msseoDelete);
+        TextView txvCancel = view.findViewById(R.id.txvFgm_msseoCancel);
+
         //editar
         txvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +94,14 @@ public class ModalSchoolSubjectEditOptions extends DialogFragment {
             @Override
             public void onClick(View v) {
                 txvDeleteOnClickListener.run();
+            }
+        });
+
+        //cancelar
+        txvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txvCancelOnClickListener.run();
             }
         });
     }

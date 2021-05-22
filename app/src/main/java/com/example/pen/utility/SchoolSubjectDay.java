@@ -8,8 +8,13 @@ import java.util.List;
 import com.example.pen.model.SchoolSubject.WeekDay;
 
 /**
+ * version: 1.0.1
  * Esta clase no forma parte del modelo, solo es utilidad para usar
  * el SchoolSubjectDAO
+ * ------
+ * 1.0.1
+ * -cambiada forma de generar datos de prueba para aumentar
+ * una hora a la hora until
  */
 public class SchoolSubjectDay {
     //region VARIABLES

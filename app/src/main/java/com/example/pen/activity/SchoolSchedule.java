@@ -96,6 +96,7 @@ public class SchoolSchedule extends AppCompatActivity {
 
             //establecer el adaptador de los datos
             rcvSchoolSchedule.setAdapter(schsad);
+
         } //fin asignar un adaptador a rcvScholSchedule
 
         //eventos

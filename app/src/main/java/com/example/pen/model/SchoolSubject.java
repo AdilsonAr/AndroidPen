@@ -3,10 +3,17 @@ package com.example.pen.model;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.RoomWarnings;
 
 import java.util.Date;
 
+/**
+ * version 1.0.2
+ * last: 22/05/2021
+ * descripcion: representa una asignatura del horario de clases
+ */
 @Entity(tableName = "school_subject")
+@SuppressWarnings({RoomWarnings.DEFAULT_CONSTRUCTOR})
 public class SchoolSubject {
     @PrimaryKey(autoGenerate = true)
     private long id;

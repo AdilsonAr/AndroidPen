@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pen.R;
 import com.example.pen.model.SchoolSubject;
 import com.example.pen.utility.IActionOnViewAtPossition;
+import com.example.pen.utility.VariousUtilities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -83,7 +84,7 @@ public class SchoolSubjectAdapterPlus extends RecyclerView.Adapter<SchoolSubject
 
     @Override
     public void onBindViewHolder(@NonNull SchoolSubjectAdapterPlus.ViewHolder holder, int position) {
-        DateFormat df = new SimpleDateFormat("hh:mm");
+        DateFormat df = VariousUtilities.getHourFormat();
 
         holder.txvSubject.setText(getSubjectList().get(position).getName());
         holder.txvFrom.setText("Desde: "+df.format(getSubjectList().get(position).getFromTime()));

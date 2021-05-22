@@ -9,7 +9,7 @@
     tools:context=".fragments.ModalSchoolSubjectEditForm">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="280dp"
+        android:layout_width="300dp"
         android:layout_height="280dp"
         android:backgroundTint="@color/appBase"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
                         android:text="Asignatura" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/edtFgm_mssefSubject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -100,7 +100,7 @@
                         android:text="Desde (Hora)" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName3"
+                        android:id="@+id/edtFgm_mssefFrom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -119,7 +119,7 @@
                         android:text="Hasta (Hora)" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName4"
+                        android:id="@+id/edtFgm_mssefUntil"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -128,10 +128,10 @@
 
                     <LinearLayout
                         android:id="@+id/llyFgm_mssefButtoms"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
@@ -139,6 +139,7 @@
                             android:id="@+id/txvFgm_mssefSave"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:background="@drawable/rounded_cornertextbtn"
                             android:text="Guardar" />
 
@@ -146,6 +147,7 @@
                             android:id="@+id/txvFgm_mssefCancel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:background="@drawable/rounded_cornertextbtn"
                             android:text="Cancelar" />
                     </LinearLayout>

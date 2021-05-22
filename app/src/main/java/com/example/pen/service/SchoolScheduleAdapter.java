@@ -1,12 +1,14 @@
 package com.example.pen.service;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.pen.R;
@@ -110,10 +112,25 @@ public class SchoolScheduleAdapter extends RecyclerView.Adapter<SchoolScheduleAd
 
             //establecer el adaptador en el reciclerview interno
             holder.rcvSubjectList.setLayoutManager(llm);
+            //holder.rcvSubjectList.setNestedScrollingEnabled(true);
             holder.rcvSubjectList.setAdapter(ssa);
             //esto permite que los recyclerview internos puedan existir (((
             holder.rcvSubjectList.setRecycledViewPool(rcvpViewPool);
-            holder.rcvSubjectList.setNestedScrollingEnabled(true);
+
+            //para que los rcv internos puedan ser scrolleados
+            holder.rcvSubjectList.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                    return false;
+                }
+            });
+
         }
     }
 
