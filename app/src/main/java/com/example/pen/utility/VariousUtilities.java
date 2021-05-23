@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * version: 1.0.1
+ * version: 1.0.2
  * ------------------
  * 1.0.1
  * -annadidos formatos de fecha y hora para acceder desde
@@ -22,6 +22,9 @@ import java.util.Date;
  * -annadido metodo para esconder el teclado virtual
  * -annadido metodo para mostrar un timepickerdialog
  * -annadida funcion para sumar horas a un tiempo
+ * 1.0.2
+ * -corregido: la funcion para sumar tiempo estaba como privada
+ * -corregido: mal calculo de hora aumentada
  */
 public class VariousUtilities {
     /**
@@ -123,8 +126,8 @@ public class VariousUtilities {
      * @param housToAdd
      * @return
      */
-    private static Date addHoursToDate(Date time, int housToAdd){
-        return new Date(time.getTime() + (housToAdd * 60 * 1000));
+    public static Date addHoursToDate(Date time, int housToAdd){
+        return new Date(time.getTime() + (housToAdd * 60 * 60 * 1000));
     }
     //endregion
 

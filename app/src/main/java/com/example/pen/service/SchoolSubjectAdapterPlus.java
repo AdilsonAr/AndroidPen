@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pen.R;
@@ -37,6 +38,7 @@ public class SchoolSubjectAdapterPlus extends RecyclerView.Adapter<SchoolSubject
         private TextView txvFrom;
         private TextView txvUntil;
         private Button btnOptions;
+        private CardView cdvAssignment;
 
         public ViewHolder(View itemView){
             super(itemView);

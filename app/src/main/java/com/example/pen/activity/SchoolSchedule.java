@@ -32,6 +32,7 @@ public class SchoolSchedule extends AppCompatActivity {
      * Mantiene una instancia de this accesible en cualquier contexto
      */
     SchoolSchedule self = this;
+    RecyclerView rcvSchoolSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +40,62 @@ public class SchoolSchedule extends AppCompatActivity {
         setContentView(R.layout.activity_school_schedule);
 
         //variables
-        RecyclerView rcvSchoolSchedule;
+        //el boton que debe retornar al menu principal
+        Button btnRetMainMenu;
         Button btnTmp;
 
         //inicializacion
         //reciclerview y elementos relacionados
         rcvSchoolSchedule = findViewById(R.id.rcvSchoolSchedule);
         rcvSchoolSchedule.setLayoutManager(new LinearLayoutManager(this));
+        btnRetMainMenu = findViewById(R.id.btnReturnToMainMenu);
 
+        //obtener los datos
+        fetchSchoolScheduleData();
+
+        //eventos
+        {
+            //este boton es solo para insertar datos de prueba 1 vez
+            btnTmp = findViewById(R.id.btnTmp);
+            btnTmp.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    List<SchoolSubjectDay> listToInsert;
+                    SchoolSubjectDao ssDao;
+                    AppDb db;
+
+                    db = Room.databaseBuilder(SchoolSchedule.this,
+                            AppDb.class,"db_pen").allowMainThreadQueries().build();
+                    listToInsert = SchoolSubjectDay.generateSchedule();
+                    ssDao = db.schoolSubjectDao();
+                    listToInsert.forEach(schoolSubjectDay -> {
+                        schoolSubjectDay.getSubjectsInDay().forEach(sc ->{
+                            ssDao.insert(sc);
+                        });
+                    });
+                    //cerrar base
+                    db.close();
+                }
+            });//fin boton de prueba
+        }
+
+        //btnRetMainMenu para retornar al menu principal
+        btnRetMainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainMenu.class));
+            }
+        });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        fetchSchoolScheduleData();
+    }
+
+    //region FUNCIONES
+    private void fetchSchoolScheduleData(){
         //obtener los datos desde la base
         List<SchoolSubjectDay> schoolSubjectDays;
         List<SchoolSubject> schoolSubjects;;
@@ -98,31 +147,6 @@ public class SchoolSchedule extends AppCompatActivity {
             rcvSchoolSchedule.setAdapter(schsad);
 
         } //fin asignar un adaptador a rcvScholSchedule
-
-        //eventos
-        {
-            //este boton e solo para insertar datos de prueba 1 vez
-            btnTmp = findViewById(R.id.btnTmp);
-            btnTmp.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    List<SchoolSubjectDay> listToInsert;
-                    SchoolSubjectDao ssDao;
-                    AppDb db;
-
-                    db = Room.databaseBuilder(SchoolSchedule.this,
-                            AppDb.class,"db_pen").allowMainThreadQueries().build();
-                    listToInsert = SchoolSubjectDay.generateSchedule();
-                    ssDao = db.schoolSubjectDao();
-                    listToInsert.forEach(schoolSubjectDay -> {
-                        schoolSubjectDay.getSubjectsInDay().forEach(sc ->{
-                            ssDao.insert(sc);
-                        });
-                    });
-                    //cerrar base
-                    db.close();
-                }
-            });//fin boton de prueba
-        }
     }
+    //endregion
 }

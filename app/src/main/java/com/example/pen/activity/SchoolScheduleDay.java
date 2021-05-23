@@ -46,12 +46,14 @@ public class SchoolScheduleDay extends AppCompatActivity {
         RecyclerView rcvSchlSchdlAssignments;
         FloatingActionButton btnAdd;
         Bundle receivedDataBundle;
+        Button btnReturn;
 
         //inicializacion
         receivedDataBundle = getIntent().getExtras();
         txtSchlSchdlDy = findViewById(R.id.txtSchlSchdlDyDay);
         rcvSchlSchdlAssignments = findViewById(R.id.rcvSchlSchdlDyAssingments);
         btnAdd = findViewById(R.id.btnSchlSchdlDyAdd);
+        btnReturn = findViewById(R.id.btnSchlSchdlDyReturn);
 
         //establecer valores de los elementos
         txtSchlSchdlDy.setText(receivedDataBundle.getString("WeekDay"));
@@ -338,6 +340,14 @@ public class SchoolScheduleDay extends AppCompatActivity {
 
             modalSseForm.show(fm, "Ingresar datos");
             //endregion assignar las acciones  los botones de la modal modalSseForm
+        });
+
+        //btnReturn
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
         //endregion EVENTOS
 
