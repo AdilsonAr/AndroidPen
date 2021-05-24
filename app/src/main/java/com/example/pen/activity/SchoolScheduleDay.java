@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class SchoolScheduleDay extends AppCompatActivity {
         RecyclerView rcvSchlSchdlAssignments;
         FloatingActionButton btnAdd;
         Bundle receivedDataBundle;
-        Button btnReturn;
+        ImageButton btnReturn;
 
         //inicializacion
         receivedDataBundle = getIntent().getExtras();

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.pen.R;
 import com.example.pen.dao.AppDb;
@@ -41,8 +42,7 @@ public class SchoolSchedule extends AppCompatActivity {
 
         //variables
         //el boton que debe retornar al menu principal
-        Button btnRetMainMenu;
-        Button btnTmp;
+        ImageButton btnRetMainMenu;
 
         //inicializacion
         //reciclerview y elementos relacionados
@@ -52,32 +52,6 @@ public class SchoolSchedule extends AppCompatActivity {
 
         //obtener los datos
         fetchSchoolScheduleData();
-
-        //eventos
-        {
-            //este boton es solo para insertar datos de prueba 1 vez
-            btnTmp = findViewById(R.id.btnTmp);
-            btnTmp.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    List<SchoolSubjectDay> listToInsert;
-                    SchoolSubjectDao ssDao;
-                    AppDb db;
-
-                    db = Room.databaseBuilder(SchoolSchedule.this,
-                            AppDb.class,"db_pen").allowMainThreadQueries().build();
-                    listToInsert = SchoolSubjectDay.generateSchedule();
-                    ssDao = db.schoolSubjectDao();
-                    listToInsert.forEach(schoolSubjectDay -> {
-                        schoolSubjectDay.getSubjectsInDay().forEach(sc ->{
-                            ssDao.insert(sc);
-                        });
-                    });
-                    //cerrar base
-                    db.close();
-                }
-            });//fin boton de prueba
-        }
 
         //btnRetMainMenu para retornar al menu principal
         btnRetMainMenu.setOnClickListener(new View.OnClickListener() {
