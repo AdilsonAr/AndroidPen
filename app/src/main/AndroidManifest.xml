@@ -18,6 +18,8 @@
         <activity android:name=".activity.Apuntes" />
         <activity android:name=".activity.Search" />
         <activity android:name=".activity.MainMenu" />
+        <activity android:name=".activity.SchoolScheduleDay"/>
+        <activity android:name=".activity.SchoolSchedule"/>
         <activity
             android:name=".activity.SplashScreen"
             android:theme="@style/SplashTheme">

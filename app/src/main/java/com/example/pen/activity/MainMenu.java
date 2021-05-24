@@ -14,11 +14,18 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        ImageButton back=findViewById(R.id.back8778);
         ImageButton apuntes=findViewById(R.id.apuntes);
         ImageButton search=findViewById(R.id.busca);
         ImageButton busquedas=findViewById(R.id.busquedas);
-
+        ImageButton horario=findViewById(R.id.horario);
+        ImageButton agenda=findViewById(R.id.agenda);
+        horario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act=new Intent(MainMenu.this,SchoolSchedule.class);
+                startActivity(act);
+            }
+        });
         apuntes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

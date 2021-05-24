@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/appBase"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".fragments.ModalSchoolSubjectEditOptions">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/appBase"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="280dp"
+            android:layout_height="280dp">
+
+            <TextView
+                android:id="@+id/txvFgm_msseoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="¿Qué acción desea realizar?"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txvFgm_msseoDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_cornertextbtn"
+                android:text="Eliminar"
+                app:layout_constraintEnd_toEndOf="@id/txvFgm_msseoEdit"
+                app:layout_constraintStart_toStartOf="@id/txvFgm_msseoEdit"
+                app:layout_constraintTop_toBottomOf="@+id/txvFgm_msseoEdit" />
+
+            <TextView
+                android:id="@+id/txvFgm_msseoEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/rounded_cornertextbtn"
+                android:text="Editar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txvFgm_msseoTitle" />
+
+            <TextView
+                android:id="@+id/txvFgm_msseoCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_cornertextbtn"
+                android:text="Cancelar"
+                app:layout_constraintEnd_toEndOf="@id/txvFgm_msseoDelete"
+                app:layout_constraintStart_toStartOf="@id/txvFgm_msseoDelete"
+                app:layout_constraintTop_toBottomOf="@+id/txvFgm_msseoDelete" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
