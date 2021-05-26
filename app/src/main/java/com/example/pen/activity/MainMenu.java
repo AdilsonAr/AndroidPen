@@ -3,6 +3,7 @@ package com.example.pen.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -48,5 +49,10 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(act);
             }
         });
+    }
+
+    public void irAgenda(View view) {
+        Intent intent = new Intent(this, ContenedorAgendas.class);
+        startActivity(intent);
     }
 }

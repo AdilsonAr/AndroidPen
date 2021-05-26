@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "231488642754",
+    "project_id": "agenda-4bded",
+    "storage_bucket": "agenda-4bded.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231488642754:android:3b8355f2af059c9b39e55b",
+        "android_client_info": {
+          "package_name": "com.example.pen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231488642754-hqfnppodbvkq4gsm5p32372qcst55led.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyFHgsqOEaUxAhzghY9zXp8BNaC-y2n2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231488642754-hqfnppodbvkq4gsm5p32372qcst55led.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
