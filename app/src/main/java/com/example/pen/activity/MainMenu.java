@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.pen.R;
+import com.google.android.material.transition.MaterialSharedAxis;
+
 public class MainMenu extends AppCompatActivity {
 
     @Override
@@ -54,5 +56,6 @@ public class MainMenu extends AppCompatActivity {
     public void irAgenda(View view) {
         Intent intent = new Intent(this, ContenedorAgendas.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 }

@@ -15,6 +15,8 @@
     <color name="color_primary">#00BCD4</color>
     <color name="color_primary_dark">#0097A7</color>
     <color name="color_accent">#FFC107</color>
+    <color name="primary_text">#212121</color>
+
     <color name="editTextColorBlack">#FF000000</color>
     <color name="hintColor">#757575</color>
     <color name="background">#00000000</color>

@@ -30,6 +30,7 @@
         android:layout_gravity="bottom|center"
         android:backgroundTint="@color/color_accent"
         app:borderWidth="0dp"
+        android:layout_marginBottom="10dp"
         app:srcCompat="@drawable/ic_plus"
         android:contentDescription="TODO" />
 

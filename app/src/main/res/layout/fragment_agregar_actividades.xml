@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.fragments.AgregarActividadesFragment">
+
+    <include layout="@layout/actionbar_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/padding_toolbar"
+            android:paddingEnd="@dimen/padding_horizontalmodel"
+            android:paddingStart="@dimen/padding_horizontalmodel"
+            android:paddingBottom="@dimen/padding_horizontalmodel">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                app:endIconMode="clear_text"
+                android:textColorHint="@color/editTextColorBlack">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtactividad_agregar"
+                    style="@style/EditTextBlack"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre de la actividad"
+                    android:textCursorDrawable="@null" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:text="Fecha de actividad: " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnfecha_agregar"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/color_accent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:borderWidth="0dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/ic_calendar"/>
+
+                <TextView
+                    android:id="@+id/txtfecha_agregar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center|start"
+                    android:hint="--Fecha seleccionada--" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:text="Hora inicio: " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnhorainicio_agregar"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/color_accent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:borderWidth="0dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/ic_clock"/>
+
+                <TextView
+                    android:id="@+id/txthorainicio_agregar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center|start"
+                    android:hint="--Hora seleccionada--" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:text="Hora fin: " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnhorafin_agregar"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/color_accent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:borderWidth="0dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/ic_clock"/>
+
+                <TextView
+                    android:id="@+id/txthorafin_agregar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center|start"
+                    android:hint="--Hora seleccionada--" />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textSize="15sp"
+                app:endIconMode="clear_text"
+                android:layout_marginBottom="5dp"
+                app:expandedHintEnabled="false"
+                android:textColorHint="@color/editTextColorBlack">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtdescripcion_agregar"
+                    style="@style/EditTextBlack"
+                    android:minLines="1"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="10"
+                    android:gravity="top|start"
+                    android:textAlignment="viewStart"
+                    app:endIconMode="clear_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Descripción de la actividad"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/btnagregar_agregar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Agregar"
+                android:layout_margin="10dp"
+                android:theme="@style/RaisedButtonDark" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

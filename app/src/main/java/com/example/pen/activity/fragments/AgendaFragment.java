@@ -1,10 +1,14 @@
 package com.example.pen.activity.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,8 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pen.R;
+import com.example.pen.activity.MainMenu;
 import com.example.pen.dao.AgendaAdaptador;
 import com.example.pen.model.ActividadesAgenda;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.transition.MaterialSharedAxis;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -30,6 +39,7 @@ public class AgendaFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    FloatingActionButton btnagregar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,6 +74,16 @@ public class AgendaFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getActivity(), MainMenu.class);
+                Objects.requireNonNull(getActivity()).startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -80,8 +100,18 @@ public class AgendaFragment extends Fragment {
 
         AgendaAdaptador picturesRecyclerview = new AgendaAdaptador(
                 buildPictures(), R.layout.cardview_picture, getActivity());
-
         picturesRecycler.setAdapter(picturesRecyclerview);
+
+        btnagregar = view.findViewById(R.id.btnagregar);
+        btnagregar.setOnClickListener(v -> {
+            AgregarActividadesFragment agregarActividad = new AgregarActividadesFragment();
+            FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out);
+            fragmentTransaction.replace(R.id.container, agregarActividad);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
         return view;
     }
 
@@ -105,4 +135,5 @@ public class AgendaFragment extends Fragment {
         return pictures;
 
     }
+
 }
