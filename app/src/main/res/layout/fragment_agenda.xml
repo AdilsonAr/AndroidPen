@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.fragments.AgendaFragment">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/color_primary_dark"
+        android:layout_gravity="center|center_horizontal"/>
 
     <include layout="@layout/actionbar_toolbar"/>
     <LinearLayout
@@ -19,7 +28,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pictureRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

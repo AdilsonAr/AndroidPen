@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -12,18 +14,29 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.pen.R;
 import com.example.pen.activity.MainMenu;
 import com.example.pen.dao.AgendaAdaptador;
 import com.example.pen.model.ActividadesAgenda;
+import com.example.pen.model.ActividadesServicios;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.MaterialSharedAxis;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,11 +53,12 @@ public class AgendaFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     FloatingActionButton btnagregar;
+    ProgressBar progressBar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    RecyclerView picturesRecycler;
     public AgendaFragment() {
         // Required empty public constructor
     }
@@ -90,8 +104,9 @@ public class AgendaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-        showToolbar("Agenda", false, view);
-        RecyclerView picturesRecycler = view.findViewById(R.id.pictureRecycler);
+        showToolbar("Agenda", true, view);
+        picturesRecycler = view.findViewById(R.id.pictureRecycler);
+        progressBar = view.findViewById(R.id.progressBar);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -99,8 +114,10 @@ public class AgendaFragment extends Fragment {
         picturesRecycler.setLayoutManager(linearLayoutManager);
 
         AgendaAdaptador picturesRecyclerview = new AgendaAdaptador(
-                buildPictures(), R.layout.cardview_picture, getActivity());
+                ActividadesServicios.activida, R.layout.cardview_picture, getActivity());
         picturesRecycler.setAdapter(picturesRecyclerview);
+
+        cargaActividades();
 
         btnagregar = view.findViewById(R.id.btnagregar);
         btnagregar.setOnClickListener(v -> {
@@ -112,6 +129,7 @@ public class AgendaFragment extends Fragment {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
+
         return view;
     }
 
@@ -120,19 +138,79 @@ public class AgendaFragment extends Fragment {
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(title);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(upButton);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MainMenu.class);
+            Objects.requireNonNull(getActivity()).startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        });
+
     }
 
-    public ArrayList<ActividadesAgenda> buildPictures() {
-        ArrayList<ActividadesAgenda> pictures = new ArrayList<>();
-        pictures.add(new ActividadesAgenda(
-                "20 de Junio de 2021",
-                "Correr",
-                "Salir a correr",
-                "6:00 AM",
-                "9:00 AM",
-                "https://i.imgur.com/VpXlavD.jpg"));
+    public void cargaActividades(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("ACTIVIDADES");
 
-        return pictures;
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    reference.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            ActividadesAgenda actividad = snapshot.getValue(ActividadesAgenda.class);
+                            assert actividad != null;
+                            actividad.setId(snapshot.getKey());
+
+                            if(!ActividadesServicios.activida.contains(actividad)){
+                                ActividadesServicios.agregarActividad(actividad);
+                            }
+                            Objects.requireNonNull(picturesRecycler.getAdapter()).notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable  String previousChildName) {
+                            ActividadesAgenda actividad = snapshot.getValue(ActividadesAgenda.class);
+                            assert actividad != null;
+                            actividad.setId(snapshot.getKey());
+                            if(ActividadesServicios.activida.contains(actividad)){
+                                ActividadesServicios.actualizar(actividad);
+                            }
+                            Objects.requireNonNull(picturesRecycler.getAdapter()).notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                            ActividadesAgenda actividad = snapshot.getValue(ActividadesAgenda.class);
+                            assert actividad != null;
+                            actividad.setId(snapshot.getKey());
+                            if(ActividadesServicios.activida.contains(actividad)){
+                                ActividadesServicios.eliminar(actividad);
+                            }
+                            Objects.requireNonNull(picturesRecycler.getAdapter()).notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull  DatabaseError error) {
+
+                        }
+                    });
+                } else {
+                    picturesRecycler.setBackgroundResource(R.drawable.add);
+                    picturesRecycler.clearOnChildAttachStateChangeListeners();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+            }
+        });
 
     }
 

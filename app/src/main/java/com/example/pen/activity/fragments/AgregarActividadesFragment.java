@@ -32,9 +32,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.transition.MaterialSharedAxis;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -135,87 +139,74 @@ public class AgregarActividadesFragment extends Fragment {
         final MaterialDatePicker materialDatePicker = builder.build();
 
         //show the calendar
-        btnfecha_agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                materialDatePicker.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), "DATE_PICKER");
-            }
-        });
+        btnfecha_agregar.setOnClickListener(v -> materialDatePicker.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), "DATE_PICKER"));
 
         //capture the date selected
-        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-            @Override
-            public void onPositiveButtonClick(Object selection) {
-                txtfecha_agregar.setText(materialDatePicker.getHeaderText());
-            }
-        });
+        materialDatePicker.addOnPositiveButtonClickListener(selection -> txtfecha_agregar.setText(materialDatePicker.getHeaderText()));
 
-        btnhorainicio_agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(
-                            getActivity(),R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        btnhorainicio_agregar.setOnClickListener(v -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        getActivity(),R.style.TimePickerTheme, (view12, hourOfDay, minute) -> {
                             t1Hour = hourOfDay;
                             t1Minute = minute;
 
                             Calendar calendar = Calendar.getInstance();
                             calendar.set(0,0,0,t1Hour,t1Minute);
                             txthorainicio_agregar.setText(DateFormat.format("hh:mm aa",calendar));
-                        }
-                    },12,0,false
-                    );
-                    timePickerDialog.updateTime(t1Hour,t1Minute);
-                    timePickerDialog.show();
-            }
+                        },12,0,false
+                );
+                timePickerDialog.updateTime(t1Hour,t1Minute);
+                timePickerDialog.show();
         });
 
-        btnhorafin_agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        getActivity(),R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        btnhorafin_agregar.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    getActivity(),R.style.TimePickerTheme, (view1, hourOfDay, minute) -> {
                         t2Hour = hourOfDay;
                         t2Minute = minute;
 
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(0,0,0,t2Hour,t2Minute);
                         txthorafin_agregar.setText(DateFormat.format("hh:mm aa",calendar));
-                    }
-                },12,0,false
-                );
-                timePickerDialog.updateTime(t2Hour,t2Minute);
-                timePickerDialog.show();
-            }
+                    },12,0,false
+            );
+            timePickerDialog.updateTime(t2Hour,t2Minute);
+            timePickerDialog.show();
         });
 
-        btnagregar_agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnagregar_agregar.setOnClickListener(v -> {
 
-                if(validar()){
-                    ActividadesAgenda actividadesAgenda = new ActividadesAgenda();
-                    actividadesAgenda.setActividad(
-                            Objects.requireNonNull(txtactividad_agregar.getText()).toString()
-                                    .substring(0,1).toUpperCase()+txtactividad_agregar.getText().toString().substring(1));
-                    actividadesAgenda.setFecha(Objects.requireNonNull(txtfecha_agregar.getText()).toString());
-                    actividadesAgenda.setHorainicio(Objects.requireNonNull(txthorainicio_agregar.getText()).toString());
-                    actividadesAgenda.setHorafin(Objects.requireNonNull(txthorafin_agregar.getText()).toString());
-                    actividadesAgenda.setDescripcion(
-                            Objects.requireNonNull(txtdescripcion_agregar.getText()).toString()
-                                    .substring(0,1).toUpperCase()+txtdescripcion_agregar.getText().toString().substring(1));
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference reference = database.getReference("ACTIVIDADES");
-                    reference.push().setValue(actividadesAgenda);
+            if(validar()){
+                ActividadesAgenda actividadesAgenda = new ActividadesAgenda();
+                actividadesAgenda.setActividad(
+                        Objects.requireNonNull(txtactividad_agregar.getText()).toString()
+                                .substring(0,1).toUpperCase()+txtactividad_agregar.getText().toString().substring(1));
+                actividadesAgenda.setFecha(Objects.requireNonNull(txtfecha_agregar.getText()).toString());
+                actividadesAgenda.setHorainicio(Objects.requireNonNull(txthorainicio_agregar.getText()).toString());
+                actividadesAgenda.setHorafin(Objects.requireNonNull(txthorafin_agregar.getText()).toString());
+                actividadesAgenda.setDescripcion(
+                        Objects.requireNonNull(txtdescripcion_agregar.getText()).toString()
+                                .substring(0,1).toUpperCase()+txtdescripcion_agregar.getText().toString().substring(1));
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference("ACTIVIDADES");
 
-                    actividadGuardada();
-                }else{
-                    Snackbar snackbar = Snackbar.make(v, "Complete todos los campos.", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
+                List<String> urlImagen = new ArrayList<>();
+                urlImagen.add("https://i.imgur.com/GTwf6Oi.jpg");
+                urlImagen.add("https://i.imgur.com/5wZNrOR.jpg");
+                urlImagen.add("https://i.imgur.com/VpXlavD.jpg");
+                urlImagen.add("https://i.imgur.com/9TYVfN6.jpg");
+                urlImagen.add("https://i.imgur.com/XMRrE8T.jpg");
+                urlImagen.add("https://i.imgur.com/tsJQb1a.jpg");
+                urlImagen.add("https://i.imgur.com/ejZqIcx.jpg?1");
+                String ramdom = urlImagen.get(new Random().nextInt(urlImagen.size()));
+                actividadesAgenda.setImagen(ramdom);
+
+                reference.push().setValue(actividadesAgenda);
+
+                actividadGuardada();
+            }else{
+                Snackbar snackbar = Snackbar.make(v, "Complete todos los campos.", Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         });
 

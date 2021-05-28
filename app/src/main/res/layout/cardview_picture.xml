@@ -25,15 +25,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="center"
             android:text="21 de Mayo de 2021"/>
         <TextView
             android:id="@+id/txtid"
-            android:layout_width="1dp"
-            android:visibility="invisible"
-            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:text="sdfsd"
+            android:layout_height="wrap_content"
             />
 
         <LinearLayout
