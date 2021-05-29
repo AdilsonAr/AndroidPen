@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:textColor="@color/white"
             android:text="sdfsd"
-            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="1dp"
             />
 
         <LinearLayout
@@ -54,7 +55,7 @@
                 android:text="Correr"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="18dp"/>
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/txtdescripcion_cardview"
@@ -141,7 +142,7 @@
                        android:id="@+id/imgeditar"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_marginEnd="12dp"
+                       android:layout_marginEnd="18dp"
                        android:src="@drawable/ic_edit"/>
                    <ImageView
                        android:id="@+id/imgeliminar"

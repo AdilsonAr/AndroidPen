@@ -54,11 +54,11 @@ public class AgendaFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     FloatingActionButton btnagregar;
     ProgressBar progressBar;
-
+    RecyclerView picturesRecycler;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    RecyclerView picturesRecycler;
+
     public AgendaFragment() {
         // Required empty public constructor
     }
@@ -94,7 +94,7 @@ public class AgendaFragment extends Fragment {
             public void handleOnBackPressed() {
                 Intent intent = new Intent(getActivity(), MainMenu.class);
                 Objects.requireNonNull(getActivity()).startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -110,7 +110,8 @@ public class AgendaFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         picturesRecycler.setLayoutManager(linearLayoutManager);
 
         AgendaAdaptador picturesRecyclerview = new AgendaAdaptador(
@@ -142,12 +143,12 @@ public class AgendaFragment extends Fragment {
         toolbar.setNavigationOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), MainMenu.class);
             Objects.requireNonNull(getActivity()).startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
 
     }
 
-    public void cargaActividades(){
+    public void cargaActividades() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("ACTIVIDADES");
 
@@ -163,18 +164,18 @@ public class AgendaFragment extends Fragment {
                             assert actividad != null;
                             actividad.setId(snapshot.getKey());
 
-                            if(!ActividadesServicios.activida.contains(actividad)){
+                            if (!ActividadesServicios.activida.contains(actividad)) {
                                 ActividadesServicios.agregarActividad(actividad);
                             }
                             Objects.requireNonNull(picturesRecycler.getAdapter()).notifyDataSetChanged();
                         }
 
                         @Override
-                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable  String previousChildName) {
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                             ActividadesAgenda actividad = snapshot.getValue(ActividadesAgenda.class);
                             assert actividad != null;
                             actividad.setId(snapshot.getKey());
-                            if(ActividadesServicios.activida.contains(actividad)){
+                            if (ActividadesServicios.activida.contains(actividad)) {
                                 ActividadesServicios.actualizar(actividad);
                             }
                             Objects.requireNonNull(picturesRecycler.getAdapter()).notifyDataSetChanged();
@@ -185,7 +186,7 @@ public class AgendaFragment extends Fragment {
                             ActividadesAgenda actividad = snapshot.getValue(ActividadesAgenda.class);
                             assert actividad != null;
                             actividad.setId(snapshot.getKey());
-                            if(ActividadesServicios.activida.contains(actividad)){
+                            if (ActividadesServicios.activida.contains(actividad)) {
                                 ActividadesServicios.eliminar(actividad);
                             }
                             Objects.requireNonNull(picturesRecycler.getAdapter()).notifyDataSetChanged();
@@ -197,7 +198,7 @@ public class AgendaFragment extends Fragment {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull  DatabaseError error) {
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
@@ -208,7 +209,7 @@ public class AgendaFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 

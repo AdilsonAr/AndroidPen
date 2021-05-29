@@ -24,6 +24,23 @@
             android:paddingStart="@dimen/padding_horizontalmodel"
             android:paddingBottom="@dimen/padding_horizontalmodel">
 
+            <TextView
+                android:id="@+id/txtid_recibido"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="idDefecto"
+                android:visibility="invisible"
+                android:layout_height="1dp"
+                />
+            <TextView
+                android:id="@+id/imgRecibida"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="@string/imgdefecto"
+                android:visibility="invisible"
+                android:layout_height="1dp"
+                />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

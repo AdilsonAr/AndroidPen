@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="img_cardView">cardView</string>
     <string name="hint_email">Actividad</string>
+    <string name="imgdefecto">https://i.imgur.com/GTwf6Oi.jpg</string>
 </resources>

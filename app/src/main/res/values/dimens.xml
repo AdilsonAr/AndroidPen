@@ -2,7 +2,7 @@
 <resources>
     <dimen name="height_cardView">200dp</dimen>
     <dimen name="corner_radius_cardview">4dp</dimen>
-    <dimen name="padding_horizontal">5dp</dimen>
+    <dimen name="padding_horizontal">8dp</dimen>
     <dimen name="padding_toolbar">10dp</dimen>
     <dimen name="padding_horizontalmodel">32dp</dimen>
 </resources>

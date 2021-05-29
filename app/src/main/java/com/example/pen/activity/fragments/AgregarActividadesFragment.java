@@ -52,12 +52,12 @@ public class AgregarActividadesFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    FloatingActionButton btnfecha_agregar,btnhorainicio_agregar,btnhorafin_agregar;
+    FloatingActionButton btnfecha_agregar, btnhorainicio_agregar, btnhorafin_agregar;
     ExtendedFloatingActionButton btnagregar_agregar;
-    TextView txtfecha_agregar,txthorainicio_agregar,txthorafin_agregar;
-    TextInputEditText txtactividad_agregar,txtdescripcion_agregar;
+    TextView txtfecha_agregar, txthorainicio_agregar, txthorafin_agregar, txtid_recibido, imgRecibida;
+    TextInputEditText txtactividad_agregar, txtdescripcion_agregar;
 
-    int t1Hour,t1Minute,t2Hour,t2Minute;
+    int t1Hour, t1Minute, t2Hour, t2Minute;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -114,18 +114,21 @@ public class AgregarActividadesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agregar_actividades, container, false);
-        showToolbar("Agregar Actividad",true,view);
 
         btnfecha_agregar = view.findViewById(R.id.btnfecha_agregar);
         btnhorainicio_agregar = view.findViewById(R.id.btnhorainicio_agregar);
         btnhorafin_agregar = view.findViewById(R.id.btnhorafin_agregar);
         btnagregar_agregar = view.findViewById(R.id.btnagregar_agregar);
 
+        txtid_recibido = view.findViewById(R.id.txtid_recibido);
         txtactividad_agregar = view.findViewById(R.id.txtactividad_agregar);
         txtfecha_agregar = view.findViewById(R.id.txtfecha_agregar);
         txthorainicio_agregar = view.findViewById(R.id.txthorainicio_agregar);
         txthorafin_agregar = view.findViewById(R.id.txthorafin_agregar);
         txtdescripcion_agregar = view.findViewById(R.id.txtdescripcion_agregar);
+        imgRecibida = view.findViewById(R.id.imgRecibida);
+
+        showToolbar("Agregar Actividad", true, view);
 
         long today = MaterialDatePicker.todayInUtcMilliseconds();
 
@@ -145,71 +148,100 @@ public class AgregarActividadesFragment extends Fragment {
         materialDatePicker.addOnPositiveButtonClickListener(selection -> txtfecha_agregar.setText(materialDatePicker.getHeaderText()));
 
         btnhorainicio_agregar.setOnClickListener(v -> {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        getActivity(),R.style.TimePickerTheme, (view12, hourOfDay, minute) -> {
-                            t1Hour = hourOfDay;
-                            t1Minute = minute;
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    getActivity(), R.style.TimePickerTheme, (view12, hourOfDay, minute) -> {
+                t1Hour = hourOfDay;
+                t1Minute = minute;
 
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.set(0,0,0,t1Hour,t1Minute);
-                            txthorainicio_agregar.setText(DateFormat.format("hh:mm aa",calendar));
-                        },12,0,false
-                );
-                timePickerDialog.updateTime(t1Hour,t1Minute);
-                timePickerDialog.show();
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(0, 0, 0, t1Hour, t1Minute);
+                txthorainicio_agregar.setText(DateFormat.format("hh:mm aa", calendar));
+            }, 12, 0, false
+            );
+            timePickerDialog.updateTime(t1Hour, t1Minute);
+            timePickerDialog.show();
         });
 
         btnhorafin_agregar.setOnClickListener(v -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
-                    getActivity(),R.style.TimePickerTheme, (view1, hourOfDay, minute) -> {
-                        t2Hour = hourOfDay;
-                        t2Minute = minute;
+                    getActivity(), R.style.TimePickerTheme, (view1, hourOfDay, minute) -> {
+                t2Hour = hourOfDay;
+                t2Minute = minute;
 
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(0,0,0,t2Hour,t2Minute);
-                        txthorafin_agregar.setText(DateFormat.format("hh:mm aa",calendar));
-                    },12,0,false
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(0, 0, 0, t2Hour, t2Minute);
+                txthorafin_agregar.setText(DateFormat.format("hh:mm aa", calendar));
+            }, 12, 0, false
             );
-            timePickerDialog.updateTime(t2Hour,t2Minute);
+            timePickerDialog.updateTime(t2Hour, t2Minute);
             timePickerDialog.show();
         });
 
         btnagregar_agregar.setOnClickListener(v -> {
 
-            if(validar()){
-                ActividadesAgenda actividadesAgenda = new ActividadesAgenda();
-                actividadesAgenda.setActividad(
-                        Objects.requireNonNull(txtactividad_agregar.getText()).toString()
-                                .substring(0,1).toUpperCase()+txtactividad_agregar.getText().toString().substring(1));
-                actividadesAgenda.setFecha(Objects.requireNonNull(txtfecha_agregar.getText()).toString());
-                actividadesAgenda.setHorainicio(Objects.requireNonNull(txthorainicio_agregar.getText()).toString());
-                actividadesAgenda.setHorafin(Objects.requireNonNull(txthorafin_agregar.getText()).toString());
-                actividadesAgenda.setDescripcion(
-                        Objects.requireNonNull(txtdescripcion_agregar.getText()).toString()
-                                .substring(0,1).toUpperCase()+txtdescripcion_agregar.getText().toString().substring(1));
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference("ACTIVIDADES");
+            if (txtid_recibido.getText().toString().equals("idDefecto")) {
+                if (validar()) {
+                    ActividadesAgenda actividadesAgenda = new ActividadesAgenda();
+                    actividadesAgenda.setActividad(
+                            Objects.requireNonNull(txtactividad_agregar.getText()).toString()
+                                    .substring(0, 1).toUpperCase() + txtactividad_agregar.getText().toString().substring(1));
+                    actividadesAgenda.setFecha(Objects.requireNonNull(txtfecha_agregar.getText()).toString());
+                    actividadesAgenda.setHorainicio(Objects.requireNonNull(txthorainicio_agregar.getText()).toString());
+                    actividadesAgenda.setHorafin(Objects.requireNonNull(txthorafin_agregar.getText()).toString());
+                    actividadesAgenda.setDescripcion(
+                            Objects.requireNonNull(txtdescripcion_agregar.getText()).toString()
+                                    .substring(0, 1).toUpperCase() + txtdescripcion_agregar.getText().toString().substring(1));
 
-                List<String> urlImagen = new ArrayList<>();
-                urlImagen.add("https://i.imgur.com/GTwf6Oi.jpg");
-                urlImagen.add("https://i.imgur.com/5wZNrOR.jpg");
-                urlImagen.add("https://i.imgur.com/VpXlavD.jpg");
-                urlImagen.add("https://i.imgur.com/9TYVfN6.jpg");
-                urlImagen.add("https://i.imgur.com/XMRrE8T.jpg");
-                urlImagen.add("https://i.imgur.com/tsJQb1a.jpg");
-                urlImagen.add("https://i.imgur.com/ejZqIcx.jpg?1");
-                String ramdom = urlImagen.get(new Random().nextInt(urlImagen.size()));
-                actividadesAgenda.setImagen(ramdom);
+                    List<String> urlImagen = new ArrayList<>();
+                    urlImagen.add("https://i.imgur.com/GTwf6Oi.jpg");
+                    urlImagen.add("https://i.imgur.com/5wZNrOR.jpg");
+                    urlImagen.add("https://i.imgur.com/VpXlavD.jpg");
+                    urlImagen.add("https://i.imgur.com/9TYVfN6.jpg");
+                    urlImagen.add("https://i.imgur.com/XMRrE8T.jpg");
+                    urlImagen.add("https://i.imgur.com/tsJQb1a.jpg");
+                    urlImagen.add("https://i.imgur.com/ejZqIcx.jpg?1");
+                    urlImagen.add("https://i.imgur.com/49HzZmv.jpg");
+                    urlImagen.add("https://i.imgur.com/V5nk8N1.jpg");
+                    urlImagen.add("https://i.imgur.com/06VVYio.jpg");
+                    urlImagen.add("https://i.imgur.com/MtLrUtx.jpg");
+                    urlImagen.add("https://i.imgur.com/QEoi9Bd.jpg");
+                    String ramdom = urlImagen.get(new Random().nextInt(urlImagen.size()));
+                    actividadesAgenda.setImagen(ramdom);
 
-                reference.push().setValue(actividadesAgenda);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference reference = database.getReference("ACTIVIDADES");
+                    reference.push().setValue(actividadesAgenda);
 
-                actividadGuardada();
-            }else{
-                Snackbar snackbar = Snackbar.make(v, "Complete todos los campos.", Snackbar.LENGTH_LONG);
-                snackbar.show();
+                    actividadGuardadaActualizada("Actividad Guardada");
+
+                } else {
+                    Snackbar snackbar = Snackbar.make(v, "Complete todos los campos.", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            } else {
+                if (validar()) {
+                    String idCapturado = txtid_recibido.getText().toString();
+                    ActividadesAgenda actividadesAgenda = new ActividadesAgenda();
+                    actividadesAgenda.setActividad(
+                            Objects.requireNonNull(txtactividad_agregar.getText()).toString()
+                                    .substring(0, 1).toUpperCase() + txtactividad_agregar.getText().toString().substring(1));
+                    actividadesAgenda.setFecha(Objects.requireNonNull(txtfecha_agregar.getText()).toString());
+                    actividadesAgenda.setHorainicio(Objects.requireNonNull(txthorainicio_agregar.getText()).toString());
+                    actividadesAgenda.setHorafin(Objects.requireNonNull(txthorafin_agregar.getText()).toString());
+                    actividadesAgenda.setDescripcion(
+                            Objects.requireNonNull(txtdescripcion_agregar.getText()).toString()
+                                    .substring(0, 1).toUpperCase() + txtdescripcion_agregar.getText().toString().substring(1));
+                    actividadesAgenda.setImagen(imgRecibida.getText().toString());
+                    DatabaseReference referencia = FirebaseDatabase.getInstance().getReference("ACTIVIDADES").child(idCapturado);
+                    referencia.setValue(actividadesAgenda);
+
+                    actividadGuardadaActualizada("Actividad Actualizada");
+                }
             }
+
         });
 
+        catchDatos(view);
         return view;
     }
 
@@ -230,42 +262,42 @@ public class AgregarActividadesFragment extends Fragment {
         });
     }
 
-    public boolean validar(){
-        if(Objects.requireNonNull(txtactividad_agregar.getText()).toString().trim().isEmpty()){
+    public boolean validar() {
+        if (Objects.requireNonNull(txtactividad_agregar.getText()).toString().trim().isEmpty()) {
             txtactividad_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0);
             return false;
-        }else{
+        } else {
             txtactividad_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_checkmark, 0);
         }
-        if(Objects.requireNonNull(txtfecha_agregar.getText()).toString().trim().isEmpty()){
+        if (Objects.requireNonNull(txtfecha_agregar.getText()).toString().trim().isEmpty()) {
             txtfecha_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0);
             return false;
-        }else{
+        } else {
             txtfecha_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_checkmark, 0);
         }
-        if(Objects.requireNonNull(txthorainicio_agregar.getText()).toString().trim().isEmpty()){
+        if (Objects.requireNonNull(txthorainicio_agregar.getText()).toString().trim().isEmpty()) {
             txthorainicio_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0);
             return false;
-        }else{
+        } else {
             txthorainicio_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_checkmark, 0);
         }
-        if(Objects.requireNonNull(txthorafin_agregar.getText()).toString().trim().isEmpty()){
+        if (Objects.requireNonNull(txthorafin_agregar.getText()).toString().trim().isEmpty()) {
             txthorafin_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0);
             return false;
-        }else{
+        } else {
             txthorafin_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_checkmark, 0);
         }
-        if(Objects.requireNonNull(txtdescripcion_agregar.getText()).toString().trim().isEmpty()){
+        if (Objects.requireNonNull(txtdescripcion_agregar.getText()).toString().trim().isEmpty()) {
             txtdescripcion_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0);
             return false;
-        }else{
+        } else {
             txtdescripcion_agregar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_checkmark, 0);
         }
 
         return true;
     }
 
-    public void actividadGuardada(){
+    public void actividadGuardadaActualizada(String mensaje) {
         AgendaFragment agendaFragment = new AgendaFragment();
         FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -273,7 +305,22 @@ public class AgregarActividadesFragment extends Fragment {
         fragmentTransaction.replace(R.id.container, agendaFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-        Toast toast = Toast.makeText(getContext(),"Actividad Guardada",Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    public void catchDatos(View view) {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            btnagregar_agregar.setText(bundle.getString("btnActualizar"));
+            txtid_recibido.setText(bundle.getString("txtid_recibido"));
+            txtactividad_agregar.setText(bundle.getString("txtactividad_agregar"));
+            txtfecha_agregar.setText(bundle.getString("txtfecha_agregar"));
+            txthorainicio_agregar.setText(bundle.getString("txthorainicio_agregar"));
+            txthorafin_agregar.setText(bundle.getString("txthorafin_agregar"));
+            txtdescripcion_agregar.setText(bundle.getString("txtdescripcion_agregar"));
+            imgRecibida.setText(bundle.getString("imgpicturecard"));
+            showToolbar("Actualizar Actividad", true, view);
+        }
     }
 }
