@@ -1,79 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/principal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:foreground="?selectableItemBackground"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/welcome_back"
+                android:textColor="#00b761"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.circularreveal.CircularRevealGridLayout
+        android:id="@+id/idgrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:padding="4dp"
+        android:layout_marginTop="70dp"
+        android:rowCount="3">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardviewMenuScores"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/apuntes"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/notes"
+                    android:layout_marginTop="@dimen/paddingButtons"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/past_scores_menu_description" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/apuntes"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_primary_dark"
+                    android:layout_marginBottom="@dimen/padding_paddingBottom"
+                    android:textSize="@dimen/text_size_textos"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardviewMenuTests"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:layout_marginBottom="10dp"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/busca"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/search"
+                    android:layout_marginTop="@dimen/paddingButtons"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/past_scores_menu_description"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/buscador"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal|bottom"
+                    android:textColor="@color/color_primary_dark"
+                    android:textSize="@dimen/text_size_textos"
+                    android:layout_marginBottom="@dimen/padding_paddingBottom"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardviewMenuPreviousScore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/busquedas"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/results"
+                    android:layout_marginTop="@dimen/paddingButtons"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/past_scores_menu_description"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/busquedas"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_primary_dark"
+                    android:textSize="@dimen/text_size_textos"
+                    android:layout_marginBottom="@dimen/padding_paddingBottom"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardviewMenuTimeTaken"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/agenda"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/agenda"
+                    android:onClick="irAgenda"
+                    android:layout_marginTop="@dimen/paddingButtons"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/past_scores_menu_description"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/agenda"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_primary_dark"
+                    android:textSize="@dimen/text_size_textos"
+                    android:layout_marginBottom="@dimen/padding_paddingBottom"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardviewMenu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/horario"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/schedule"
+                    android:layout_marginTop="@dimen/paddingButtons"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/past_scores_menu_description"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/horario"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_primary_dark"
+                    android:textSize="@dimen/text_size_textos"
+                    android:layout_marginBottom="@dimen/padding_paddingBottom"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.google.android.material.circularreveal.CircularRevealGridLayout>
 
 
-    <ImageButton
-        android:id="@+id/apuntes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/white"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/busca"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/notas" />
-
-
-    <ImageButton
-        android:id="@+id/busca"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/white"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/apuntes"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ask" />
-
-    <ImageButton
-        android:id="@+id/busquedas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/white"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/agenda"
-        app:layout_constraintStart_toStartOf="@+id/apuntes"
-        app:layout_constraintTop_toBottomOf="@+id/apuntes"
-        app:srcCompat="@drawable/busquedas2" />
-
-    <ImageButton
-        android:id="@+id/agenda"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/white"
-        android:scaleType="fitCenter"
-        android:onClick="irAgenda"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/busquedas"
-        app:layout_constraintTop_toBottomOf="@+id/busca"
-        app:srcCompat="@drawable/agenda_temp" />
-
-    <ImageButton
-        android:id="@+id/horario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/white"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="@+id/busquedas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/busquedas"
-        app:srcCompat="@drawable/horario_temp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

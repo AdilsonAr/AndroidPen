@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.pen.R;
 import com.google.android.material.transition.MaterialSharedAxis;
@@ -17,39 +18,26 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        ImageButton apuntes=findViewById(R.id.apuntes);
-        ImageButton search=findViewById(R.id.busca);
-        ImageButton busquedas=findViewById(R.id.busquedas);
-        ImageButton horario=findViewById(R.id.horario);
-        ImageButton agenda=findViewById(R.id.agenda);
-        horario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent act=new Intent(MainMenu.this,SchoolSchedule.class);
-                startActivity(act);
-            }
+        ImageView apuntes=findViewById(R.id.apuntes);
+        ImageView search=findViewById(R.id.busca);
+        ImageView busquedas=findViewById(R.id.busquedas);
+        ImageView horario=findViewById(R.id.horario);
+        horario.setOnClickListener(v -> {
+            Intent act=new Intent(MainMenu.this,SchoolSchedule.class);
+            startActivity(act);
         });
-        apuntes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent act=new Intent(MainMenu.this,Apuntes.class);
-                startActivity(act);
-            }
+        apuntes.setOnClickListener(v -> {
+            Intent act=new Intent(MainMenu.this,Apuntes.class);
+            startActivity(act);
         });
 
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent act=new Intent(MainMenu.this,Search.class);
-                startActivity(act);
-            }
+        search.setOnClickListener(v -> {
+            Intent act=new Intent(MainMenu.this,Search.class);
+            startActivity(act);
         });
-        busquedas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent act=new Intent(MainMenu.this,SearchList.class);
-                startActivity(act);
-            }
+        busquedas.setOnClickListener(v -> {
+            Intent act=new Intent(MainMenu.this,SearchList.class);
+            startActivity(act);
         });
     }
 

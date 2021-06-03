@@ -5,4 +5,15 @@
     <string name="img_cardView">cardView</string>
     <string name="hint_email">Actividad</string>
     <string name="imgdefecto">https://i.imgur.com/GTwf6Oi.jpg</string>
+    <string name="past_scores_menu_description">Apuntes</string>
+    <string name="total_score_menu">Total</string>
+    <string name="tests_menu">Total</string>
+    <string name="previous_score_menu">Total</string>
+    <string name="time_taken_menu">Total</string>
+    <string name="apuntes">Apuntes</string>
+    <string name="buscador">Buscar</string>
+    <string name="busquedas">Busquedas</string>
+    <string name="agenda">Agenda</string>
+    <string name="horario">Horario</string>
+    <string name="welcome_back">Bienvenidos!</string>
 </resources>
